@@ -1,0 +1,1234 @@
+
+C:\Users\TuxZ\AppData\Local\arduino\sketches\FC0C464412FCAFEAE0BA7A4D2F3634A2/ATtiny2313_i2c_LCD_INA219.ino.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	14 c0       	rjmp	.+40     	; 0x2a <__ctors_end>
+   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
+   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
+   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
+   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
+   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
+  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
+  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
+  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
+  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
+  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
+  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
+  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
+  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
+  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
+  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
+  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+  26:	12 c0       	rjmp	.+36     	; 0x4c <__bad_interrupt>
+  28:	11 c0       	rjmp	.+34     	; 0x4c <__bad_interrupt>
+
+0000002a <__ctors_end>:
+__trampolines_start():
+  2a:	11 24       	eor	r1, r1
+  2c:	1f be       	out	0x3f, r1	; 63
+  2e:	cf ed       	ldi	r28, 0xDF	; 223
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+__do_copy_data():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2409
+  32:	10 e0       	ldi	r17, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2410
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2411
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2412
+  38:	ee e4       	ldi	r30, 0x4E	; 78
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2413
+  3a:	f4 e0       	ldi	r31, 0x04	; 4
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2414
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2417
+  3e:	05 90       	lpm	r0, Z+
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2422
+  40:	0d 92       	st	X+, r0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2424
+  42:	aa 36       	cpi	r26, 0x6A	; 106
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2425
+  44:	b1 07       	cpc	r27, r17
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2426
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_L__+0x1>
+  48:	b8 d0       	rcall	.+368    	; 0x1ba <main>
+  4a:	ff c1       	rjmp	.+1022   	; 0x44a <_exit>
+
+0000004c <__bad_interrupt>:
+__vector_1():
+  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+
+0000004e <scl_lo()>:
+_ZL6scl_lov():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:35
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+static inline void sda_hi() { DDRD &= ~_BV(SDA_PIN); PORTD |=  _BV(SDA_PIN); }
+static inline void sda_lo() { DDRD |=  _BV(SDA_PIN); PORTD &= ~_BV(SDA_PIN); }
+static inline void scl_hi() { DDRD &= ~_BV(SCL_PIN); PORTD |=  _BV(SCL_PIN); }
+static inline void scl_lo() { DDRD |=  _BV(SCL_PIN); PORTD &= ~_BV(SCL_PIN); }
+  4e:	8d 9a       	sbi	0x11, 5	; 17
+  50:	95 98       	cbi	0x12, 5	; 18
+  52:	08 95       	ret
+
+00000054 <scl_hi()>:
+_ZL6scl_hiv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:34
+static inline void i2c_delay() {
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+static inline void sda_hi() { DDRD &= ~_BV(SDA_PIN); PORTD |=  _BV(SDA_PIN); }
+static inline void sda_lo() { DDRD |=  _BV(SDA_PIN); PORTD &= ~_BV(SDA_PIN); }
+static inline void scl_hi() { DDRD &= ~_BV(SCL_PIN); PORTD |=  _BV(SCL_PIN); }
+  54:	8d 98       	cbi	0x11, 5	; 17
+  56:	95 9a       	sbi	0x12, 5	; 18
+  58:	08 95       	ret
+
+0000005a <sda_lo()>:
+_ZL6sda_lov():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:33
+
+static inline void i2c_delay() {
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+static inline void sda_hi() { DDRD &= ~_BV(SDA_PIN); PORTD |=  _BV(SDA_PIN); }
+static inline void sda_lo() { DDRD |=  _BV(SDA_PIN); PORTD &= ~_BV(SDA_PIN); }
+  5a:	8c 9a       	sbi	0x11, 4	; 17
+  5c:	94 98       	cbi	0x12, 4	; 18
+  5e:	08 95       	ret
+
+00000060 <sda_hi()>:
+_ZL6sda_hiv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:32
+#define LCD_5x8DOTS 0x00
+
+static inline void i2c_delay() {
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+static inline void sda_hi() { DDRD &= ~_BV(SDA_PIN); PORTD |=  _BV(SDA_PIN); }
+  60:	8c 98       	cbi	0x11, 4	; 17
+  62:	94 9a       	sbi	0x12, 4	; 18
+  64:	08 95       	ret
+
+00000066 <i2c_delay()>:
+	...
+_ZL9i2c_delayv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:31
+#define LCD_2LINE 0x08
+#define LCD_5x8DOTS 0x00
+
+static inline void i2c_delay() {
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+  76:	08 95       	ret
+
+00000078 <i2c_read(bool)>:
+_Z8i2c_readb():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:58
+  sda_hi(); i2c_delay(); scl_hi(); i2c_delay();
+  bool ack = !(PIND & _BV(SDA_PIN));
+  scl_lo(); i2c_delay();
+  return ack;
+}
+uint8_t i2c_read(bool ack) {
+  78:	1f 93       	push	r17
+  7a:	cf 93       	push	r28
+  7c:	df 93       	push	r29
+  7e:	18 2f       	mov	r17, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:60
+  uint8_t data = 0;
+  sda_hi();
+  80:	ef df       	rcall	.-34     	; 0x60 <sda_hi()>
+  82:	d8 e0       	ldi	r29, 0x08	; 8
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:59
+  bool ack = !(PIND & _BV(SDA_PIN));
+  scl_lo(); i2c_delay();
+  return ack;
+}
+uint8_t i2c_read(bool ack) {
+  uint8_t data = 0;
+  84:	c0 e0       	ldi	r28, 0x00	; 0
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:62
+  sda_hi();
+  for (uint8_t i = 0; i < 8; i++) {
+    data <<= 1;
+  86:	cc 0f       	add	r28, r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:63
+    scl_hi(); i2c_delay();
+  88:	e5 df       	rcall	.-54     	; 0x54 <scl_hi()>
+  8a:	ed df       	rcall	.-38     	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:64
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+  8c:	84 99       	sbic	0x10, 4	; 16
+  8e:	c1 60       	ori	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:65
+    scl_lo(); i2c_delay();
+  90:	de df       	rcall	.-68     	; 0x4e <scl_lo()>
+  92:	e9 df       	rcall	.-46     	; 0x66 <i2c_delay()>
+  94:	d1 50       	subi	r29, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:61
+  return ack;
+}
+uint8_t i2c_read(bool ack) {
+  uint8_t data = 0;
+  sda_hi();
+  for (uint8_t i = 0; i < 8; i++) {
+  96:	b9 f7       	brne	.-18     	; 0x86 <i2c_read(bool)+0xe>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:67
+    data <<= 1;
+    scl_hi(); i2c_delay();
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+    scl_lo(); i2c_delay();
+  }
+  if (ack) sda_lo(); else sda_hi();
+  98:	11 23       	and	r17, r17
+  9a:	61 f0       	breq	.+24     	; 0xb4 <i2c_read(bool)+0x3c>
+  9c:	de df       	rcall	.-68     	; 0x5a <sda_lo()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:68
+  i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+  9e:	e3 df       	rcall	.-58     	; 0x66 <i2c_delay()>
+  a0:	d9 df       	rcall	.-78     	; 0x54 <scl_hi()>
+  a2:	e1 df       	rcall	.-62     	; 0x66 <i2c_delay()>
+  a4:	d4 df       	rcall	.-88     	; 0x4e <scl_lo()>
+  a6:	df df       	rcall	.-66     	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:69
+  sda_hi();
+  a8:	db df       	rcall	.-74     	; 0x60 <sda_hi()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:71
+  return data;
+}
+  aa:	8c 2f       	mov	r24, r28
+  ac:	df 91       	pop	r29
+  ae:	cf 91       	pop	r28
+  b0:	1f 91       	pop	r17
+  b2:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:67
+    data <<= 1;
+    scl_hi(); i2c_delay();
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+    scl_lo(); i2c_delay();
+  }
+  if (ack) sda_lo(); else sda_hi();
+  b4:	d5 df       	rcall	.-86     	; 0x60 <sda_hi()>
+  b6:	f3 cf       	rjmp	.-26     	; 0x9e <i2c_read(bool)+0x26>
+
+000000b8 <i2c_write(unsigned char)>:
+_Z9i2c_writeh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:47
+static void i2c_stop() {
+  sda_lo(); i2c_delay();
+  scl_hi(); i2c_delay();
+  sda_hi(); i2c_delay();
+}
+bool i2c_write(uint8_t data) {
+  b8:	cf 93       	push	r28
+  ba:	df 93       	push	r29
+  bc:	d8 2f       	mov	r29, r24
+  be:	c8 e0       	ldi	r28, 0x08	; 8
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:49
+  for (uint8_t i = 0; i < 8; i++) {
+    if (data & 0x80) sda_hi(); else sda_lo();
+  c0:	d7 ff       	sbrs	r29, 7
+  c2:	17 c0       	rjmp	.+46     	; 0xf2 <__stack+0x13>
+  c4:	cd df       	rcall	.-102    	; 0x60 <sda_hi()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:50
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+  c6:	cf df       	rcall	.-98     	; 0x66 <i2c_delay()>
+  c8:	c5 df       	rcall	.-118    	; 0x54 <scl_hi()>
+  ca:	cd df       	rcall	.-102    	; 0x66 <i2c_delay()>
+  cc:	c0 df       	rcall	.-128    	; 0x4e <scl_lo()>
+  ce:	cb df       	rcall	.-106    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:51
+    data <<= 1;
+  d0:	dd 0f       	add	r29, r29
+  d2:	c1 50       	subi	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:48
+  sda_lo(); i2c_delay();
+  scl_hi(); i2c_delay();
+  sda_hi(); i2c_delay();
+}
+bool i2c_write(uint8_t data) {
+  for (uint8_t i = 0; i < 8; i++) {
+  d4:	a9 f7       	brne	.-22     	; 0xc0 <i2c_write(unsigned char)+0x8>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:53
+    if (data & 0x80) sda_hi(); else sda_lo();
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+    data <<= 1;
+  }
+  sda_hi(); i2c_delay(); scl_hi(); i2c_delay();
+  d6:	c4 df       	rcall	.-120    	; 0x60 <sda_hi()>
+  d8:	c6 df       	rcall	.-116    	; 0x66 <i2c_delay()>
+  da:	bc df       	rcall	.-136    	; 0x54 <scl_hi()>
+  dc:	c4 df       	rcall	.-120    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:54
+  bool ack = !(PIND & _BV(SDA_PIN));
+  de:	c0 b3       	in	r28, 0x10	; 16
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:55
+  scl_lo(); i2c_delay();
+  e0:	b6 df       	rcall	.-148    	; 0x4e <scl_lo()>
+  e2:	c1 df       	rcall	.-126    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:54
+    if (data & 0x80) sda_hi(); else sda_lo();
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+    data <<= 1;
+  }
+  sda_hi(); i2c_delay(); scl_hi(); i2c_delay();
+  bool ack = !(PIND & _BV(SDA_PIN));
+  e4:	c2 95       	swap	r28
+  e6:	c1 70       	andi	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:57
+  scl_lo(); i2c_delay();
+  return ack;
+}
+  e8:	81 e0       	ldi	r24, 0x01	; 1
+  ea:	8c 27       	eor	r24, r28
+  ec:	df 91       	pop	r29
+  ee:	cf 91       	pop	r28
+  f0:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:49
+  scl_hi(); i2c_delay();
+  sda_hi(); i2c_delay();
+}
+bool i2c_write(uint8_t data) {
+  for (uint8_t i = 0; i < 8; i++) {
+    if (data & 0x80) sda_hi(); else sda_lo();
+  f2:	b3 df       	rcall	.-154    	; 0x5a <sda_lo()>
+  f4:	e8 cf       	rjmp	.-48     	; 0xc6 <i2c_write(unsigned char)+0xe>
+
+000000f6 <i2c_stop()>:
+_ZL8i2c_stopv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:43
+  sda_hi(); scl_hi(); i2c_delay();
+  sda_lo(); i2c_delay();
+  scl_lo(); i2c_delay();
+}
+static void i2c_stop() {
+  sda_lo(); i2c_delay();
+  f6:	b1 df       	rcall	.-158    	; 0x5a <sda_lo()>
+  f8:	b6 df       	rcall	.-148    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:44
+  scl_hi(); i2c_delay();
+  fa:	ac df       	rcall	.-168    	; 0x54 <scl_hi()>
+  fc:	b4 df       	rcall	.-152    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:45
+  sda_hi(); i2c_delay();
+  fe:	b0 df       	rcall	.-160    	; 0x60 <sda_hi()>
+ 100:	b2 cf       	rjmp	.-156    	; 0x66 <i2c_delay()>
+
+00000102 <i2c_start()>:
+_ZL9i2c_startv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:38
+static inline void sda_lo() { DDRD |=  _BV(SDA_PIN); PORTD &= ~_BV(SDA_PIN); }
+static inline void scl_hi() { DDRD &= ~_BV(SCL_PIN); PORTD |=  _BV(SCL_PIN); }
+static inline void scl_lo() { DDRD |=  _BV(SCL_PIN); PORTD &= ~_BV(SCL_PIN); }
+
+static void i2c_start() {
+  sda_hi(); scl_hi(); i2c_delay();
+ 102:	ae df       	rcall	.-164    	; 0x60 <sda_hi()>
+ 104:	a7 df       	rcall	.-178    	; 0x54 <scl_hi()>
+ 106:	af df       	rcall	.-162    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:39
+  sda_lo(); i2c_delay();
+ 108:	a8 df       	rcall	.-176    	; 0x5a <sda_lo()>
+ 10a:	ad df       	rcall	.-166    	; 0x66 <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:40
+  scl_lo(); i2c_delay();
+ 10c:	a0 df       	rcall	.-192    	; 0x4e <scl_lo()>
+ 10e:	ab cf       	rjmp	.-170    	; 0x66 <i2c_delay()>
+
+00000110 <lcd_expanderWrite(unsigned char)>:
+_ZL17lcd_expanderWriteh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:101
+void ina219_init() {
+  ina219_write(0x05, 0x2000);
+  ina219_write(0x00, 0x019F);
+}
+
+static void lcd_expanderWrite(uint8_t data) {
+ 110:	cf 93       	push	r28
+ 112:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:102
+  i2c_start();
+ 114:	f6 df       	rcall	.-20     	; 0x102 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:103
+  i2c_write(LCD_ADDR << 1);
+ 116:	8e e4       	ldi	r24, 0x4E	; 78
+ 118:	cf df       	rcall	.-98     	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:104
+  i2c_write(data | BACKLIGHT);
+ 11a:	8c 2f       	mov	r24, r28
+ 11c:	88 60       	ori	r24, 0x08	; 8
+ 11e:	cc df       	rcall	.-104    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:106
+  i2c_stop();
+}
+ 120:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:105
+
+static void lcd_expanderWrite(uint8_t data) {
+  i2c_start();
+  i2c_write(LCD_ADDR << 1);
+  i2c_write(data | BACKLIGHT);
+  i2c_stop();
+ 122:	e9 cf       	rjmp	.-46     	; 0xf6 <i2c_stop()>
+
+00000124 <ina219_read(unsigned char)>:
+_Z11ina219_readh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:81
+  i2c_write(r);
+  i2c_write(v >> 8);
+  i2c_write(v & 0xFF);
+  i2c_stop();
+}
+uint16_t ina219_read(uint8_t r) {
+ 124:	cf 93       	push	r28
+ 126:	df 93       	push	r29
+ 128:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:83
+  uint8_t hb, lb;
+  i2c_start();
+ 12a:	eb df       	rcall	.-42     	; 0x102 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:84
+  i2c_write(INA219_ADDR << 1);
+ 12c:	80 e8       	ldi	r24, 0x80	; 128
+ 12e:	c4 df       	rcall	.-120    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:85
+  i2c_write(r);
+ 130:	8c 2f       	mov	r24, r28
+ 132:	c2 df       	rcall	.-124    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:86
+  i2c_stop();
+ 134:	e0 df       	rcall	.-64     	; 0xf6 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:87
+  i2c_start();
+ 136:	e5 df       	rcall	.-54     	; 0x102 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:88
+  i2c_write((INA219_ADDR << 1) | 1);
+ 138:	81 e8       	ldi	r24, 0x81	; 129
+ 13a:	be df       	rcall	.-132    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:89
+  hb = i2c_read(true);
+ 13c:	81 e0       	ldi	r24, 0x01	; 1
+ 13e:	9c df       	rcall	.-200    	; 0x78 <i2c_read(bool)>
+ 140:	d8 2f       	mov	r29, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:90
+  lb = i2c_read(false);
+ 142:	80 e0       	ldi	r24, 0x00	; 0
+ 144:	99 df       	rcall	.-206    	; 0x78 <i2c_read(bool)>
+ 146:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:91
+  i2c_stop();
+ 148:	d6 df       	rcall	.-84     	; 0xf6 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:93
+  return (hb << 8) | lb;
+}
+ 14a:	ce 01       	movw	r24, r28
+ 14c:	df 91       	pop	r29
+ 14e:	cf 91       	pop	r28
+ 150:	08 95       	ret
+
+00000152 <lcd_write4bits(unsigned char)>:
+_ZL14lcd_write4bitsh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:113
+  lcd_expanderWrite(data | En);
+  _delay_us(1);
+  lcd_expanderWrite(data & ~En);
+  _delay_us(50);
+}
+static void lcd_write4bits(uint8_t value) {
+ 152:	cf 93       	push	r28
+ 154:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:114
+  lcd_expanderWrite(value);
+ 156:	dc df       	rcall	.-72     	; 0x110 <lcd_expanderWrite(unsigned char)>
+lcd_pulseEnable():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:108
+  i2c_write(LCD_ADDR << 1);
+  i2c_write(data | BACKLIGHT);
+  i2c_stop();
+}
+static void lcd_pulseEnable(uint8_t data) {
+  lcd_expanderWrite(data | En);
+ 158:	8c 2f       	mov	r24, r28
+ 15a:	84 60       	ori	r24, 0x04	; 4
+ 15c:	d9 df       	rcall	.-78     	; 0x110 <lcd_expanderWrite(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 15e:	84 e0       	ldi	r24, 0x04	; 4
+ 160:	8a 95       	dec	r24
+ 162:	f1 f7       	brne	.-4      	; 0x160 <lcd_write4bits(unsigned char)+0xe>
+lcd_pulseEnable():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:110
+  _delay_us(1);
+  lcd_expanderWrite(data & ~En);
+ 164:	8c 2f       	mov	r24, r28
+ 166:	8b 7f       	andi	r24, 0xFB	; 251
+ 168:	d3 df       	rcall	.-90     	; 0x110 <lcd_expanderWrite(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 16a:	88 ec       	ldi	r24, 0xC8	; 200
+ 16c:	8a 95       	dec	r24
+ 16e:	f1 f7       	brne	.-4      	; 0x16c <lcd_write4bits(unsigned char)+0x1a>
+_ZL14lcd_write4bitsh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:116
+  _delay_us(50);
+}
+static void lcd_write4bits(uint8_t value) {
+  lcd_expanderWrite(value);
+  lcd_pulseEnable(value);
+}
+ 170:	cf 91       	pop	r28
+ 172:	08 95       	ret
+
+00000174 <lcd_send(unsigned char, unsigned char)>:
+_ZL8lcd_sendhh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:117
+static void lcd_send(uint8_t value, uint8_t mode) {
+ 174:	cf 93       	push	r28
+ 176:	df 93       	push	r29
+ 178:	c8 2f       	mov	r28, r24
+ 17a:	d6 2f       	mov	r29, r22
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:118
+  uint8_t highnib = (value & 0xF0) | mode;
+ 17c:	80 7f       	andi	r24, 0xF0	; 240
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:120
+  uint8_t lownib  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(highnib);
+ 17e:	86 2b       	or	r24, r22
+ 180:	e8 df       	rcall	.-48     	; 0x152 <lcd_write4bits(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:119
+  lcd_expanderWrite(value);
+  lcd_pulseEnable(value);
+}
+static void lcd_send(uint8_t value, uint8_t mode) {
+  uint8_t highnib = (value & 0xF0) | mode;
+  uint8_t lownib  = ((value << 4) & 0xF0) | mode;
+ 182:	8c 2f       	mov	r24, r28
+ 184:	82 95       	swap	r24
+ 186:	80 7f       	andi	r24, 0xF0	; 240
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:121
+  lcd_write4bits(highnib);
+  lcd_write4bits(lownib);
+ 188:	8d 2b       	or	r24, r29
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:122
+}
+ 18a:	df 91       	pop	r29
+ 18c:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:121
+}
+static void lcd_send(uint8_t value, uint8_t mode) {
+  uint8_t highnib = (value & 0xF0) | mode;
+  uint8_t lownib  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(highnib);
+  lcd_write4bits(lownib);
+ 18e:	e1 cf       	rjmp	.-62     	; 0x152 <lcd_write4bits(unsigned char)>
+
+00000190 <lcd_print(char const*)>:
+_Z9lcd_printPKc():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:147
+void lcd_setcursor(uint8_t row, uint8_t col) {
+  static const uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
+  if (row > 1) row = 1;
+  lcd_command(LCD_SETDDRAMADDR | (col + row_offsets[row]));
+}
+void lcd_print(const char* str) {
+ 190:	cf 93       	push	r28
+ 192:	df 93       	push	r29
+ 194:	ec 01       	movw	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:148
+  while (*str) lcd_send(*str++, Rs);
+ 196:	89 91       	ld	r24, Y+
+ 198:	88 23       	and	r24, r24
+ 19a:	19 f0       	breq	.+6      	; 0x1a2 <lcd_print(char const*)+0x12>
+ 19c:	61 e0       	ldi	r22, 0x01	; 1
+ 19e:	ea df       	rcall	.-44     	; 0x174 <lcd_send(unsigned char, unsigned char)>
+ 1a0:	fa cf       	rjmp	.-12     	; 0x196 <lcd_print(char const*)+0x6>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:149
+}
+ 1a2:	df 91       	pop	r29
+ 1a4:	cf 91       	pop	r28
+ 1a6:	08 95       	ret
+
+000001a8 <lcd_setcursor(unsigned char, unsigned char)>:
+_Z13lcd_setcursorhh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:145
+//   _delay_ms(2);
+// }
+void lcd_setcursor(uint8_t row, uint8_t col) {
+  static const uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
+  if (row > 1) row = 1;
+  lcd_command(LCD_SETDDRAMADDR | (col + row_offsets[row]));
+ 1a8:	e8 2f       	mov	r30, r24
+ 1aa:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ac:	e0 5a       	subi	r30, 0xA0	; 160
+ 1ae:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1b0:	80 81       	ld	r24, Z
+ 1b2:	86 0f       	add	r24, r22
+lcd_command():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:124
+  uint8_t lownib  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(highnib);
+  lcd_write4bits(lownib);
+}
+void lcd_command(uint8_t cmd) {
+  lcd_send(cmd, 0);
+ 1b4:	60 e0       	ldi	r22, 0x00	; 0
+ 1b6:	80 68       	ori	r24, 0x80	; 128
+ 1b8:	dd cf       	rjmp	.-70     	; 0x174 <lcd_send(unsigned char, unsigned char)>
+
+000001ba <main>:
+main():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:199
+
+  PORTB ^= _BV(LED_PIN);
+  _delay_ms(500);
+}
+
+int main(void) {
+ 1ba:	cf 93       	push	r28
+ 1bc:	df 93       	push	r29
+ 1be:	cd b7       	in	r28, 0x3d	; 61
+ 1c0:	dd 27       	eor	r29, r29
+ 1c2:	c8 50       	subi	r28, 0x08	; 8
+ 1c4:	cd bf       	out	0x3d, r28	; 61
+setup():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:152
+void lcd_print(const char* str) {
+  while (*str) lcd_send(*str++, Rs);
+}
+
+void setup() {
+  DDRB |= _BV(LED_PIN);
+ 1c6:	bc 9a       	sbi	0x17, 4	; 23
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:153
+  PORTB &= ~_BV(LED_PIN);
+ 1c8:	c4 98       	cbi	0x18, 4	; 24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:154
+  sda_hi(); scl_hi();
+ 1ca:	4a df       	rcall	.-364    	; 0x60 <sda_hi()>
+ 1cc:	43 df       	rcall	.-378    	; 0x54 <scl_hi()>
+lcd_init():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:127
+}
+void lcd_command(uint8_t cmd) {
+  lcd_send(cmd, 0);
+}
+void lcd_init() {
+  lcd_expanderWrite(0);
+ 1ce:	80 e0       	ldi	r24, 0x00	; 0
+ 1d0:	9f df       	rcall	.-194    	; 0x110 <lcd_expanderWrite(unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1d2:	2f eb       	ldi	r18, 0xBF	; 191
+ 1d4:	84 ed       	ldi	r24, 0xD4	; 212
+ 1d6:	91 e0       	ldi	r25, 0x01	; 1
+ 1d8:	21 50       	subi	r18, 0x01	; 1
+ 1da:	80 40       	sbci	r24, 0x00	; 0
+ 1dc:	90 40       	sbci	r25, 0x00	; 0
+ 1de:	e1 f7       	brne	.-8      	; 0x1d8 <main+0x1e>
+ 1e0:	00 c0       	rjmp	.+0      	; 0x1e2 <main+0x28>
+ 1e2:	00 00       	nop
+lcd_init():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:129
+  _delay_ms(50);
+  lcd_write4bits(0x30); _delay_ms(5);
+ 1e4:	80 e3       	ldi	r24, 0x30	; 48
+ 1e6:	b5 df       	rcall	.-150    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 1e8:	87 e9       	ldi	r24, 0x97	; 151
+ 1ea:	9a e3       	ldi	r25, 0x3A	; 58
+ 1ec:	01 97       	sbiw	r24, 0x01	; 1
+ 1ee:	f1 f7       	brne	.-4      	; 0x1ec <main+0x32>
+ 1f0:	00 c0       	rjmp	.+0      	; 0x1f2 <main+0x38>
+ 1f2:	00 00       	nop
+lcd_init():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:130
+  lcd_write4bits(0x30); _delay_us(150);
+ 1f4:	80 e3       	ldi	r24, 0x30	; 48
+ 1f6:	ad df       	rcall	.-166    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1f8:	81 ec       	ldi	r24, 0xC1	; 193
+ 1fa:	91 e0       	ldi	r25, 0x01	; 1
+ 1fc:	01 97       	sbiw	r24, 0x01	; 1
+ 1fe:	f1 f7       	brne	.-4      	; 0x1fc <main+0x42>
+ 200:	00 c0       	rjmp	.+0      	; 0x202 <main+0x48>
+ 202:	00 00       	nop
+lcd_init():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:131
+  lcd_write4bits(0x30); _delay_us(150);
+ 204:	80 e3       	ldi	r24, 0x30	; 48
+ 206:	a5 df       	rcall	.-182    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 208:	81 ec       	ldi	r24, 0xC1	; 193
+ 20a:	91 e0       	ldi	r25, 0x01	; 1
+ 20c:	01 97       	sbiw	r24, 0x01	; 1
+ 20e:	f1 f7       	brne	.-4      	; 0x20c <main+0x52>
+ 210:	00 c0       	rjmp	.+0      	; 0x212 <main+0x58>
+ 212:	00 00       	nop
+lcd_init():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:132
+  lcd_write4bits(0x20); _delay_us(150);
+ 214:	80 e2       	ldi	r24, 0x20	; 32
+ 216:	9d df       	rcall	.-198    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 218:	81 ec       	ldi	r24, 0xC1	; 193
+ 21a:	91 e0       	ldi	r25, 0x01	; 1
+ 21c:	01 97       	sbiw	r24, 0x01	; 1
+ 21e:	f1 f7       	brne	.-4      	; 0x21c <main+0x62>
+ 220:	00 c0       	rjmp	.+0      	; 0x222 <main+0x68>
+ 222:	00 00       	nop
+lcd_command():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:124
+  uint8_t lownib  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(highnib);
+  lcd_write4bits(lownib);
+}
+void lcd_command(uint8_t cmd) {
+  lcd_send(cmd, 0);
+ 224:	60 e0       	ldi	r22, 0x00	; 0
+ 226:	88 e2       	ldi	r24, 0x28	; 40
+ 228:	a5 df       	rcall	.-182    	; 0x174 <lcd_send(unsigned char, unsigned char)>
+ 22a:	60 e0       	ldi	r22, 0x00	; 0
+ 22c:	8c e0       	ldi	r24, 0x0C	; 12
+ 22e:	a2 df       	rcall	.-188    	; 0x174 <lcd_send(unsigned char, unsigned char)>
+ 230:	60 e0       	ldi	r22, 0x00	; 0
+ 232:	81 e0       	ldi	r24, 0x01	; 1
+ 234:	9f df       	rcall	.-194    	; 0x174 <lcd_send(unsigned char, unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 236:	8f e6       	ldi	r24, 0x6F	; 111
+ 238:	97 e1       	ldi	r25, 0x17	; 23
+ 23a:	01 97       	sbiw	r24, 0x01	; 1
+ 23c:	f1 f7       	brne	.-4      	; 0x23a <main+0x80>
+ 23e:	00 c0       	rjmp	.+0      	; 0x240 <main+0x86>
+ 240:	00 00       	nop
+lcd_command():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:124
+ 242:	60 e0       	ldi	r22, 0x00	; 0
+ 244:	86 e0       	ldi	r24, 0x06	; 6
+ 246:	96 df       	rcall	.-212    	; 0x174 <lcd_send(unsigned char, unsigned char)>
+ina219_write():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:74
+  sda_hi();
+  return data;
+}
+
+void ina219_write(uint8_t r, uint16_t v) {
+  i2c_start();
+ 248:	5c df       	rcall	.-328    	; 0x102 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:75
+  i2c_write(INA219_ADDR << 1);
+ 24a:	80 e8       	ldi	r24, 0x80	; 128
+ 24c:	35 df       	rcall	.-406    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:76
+  i2c_write(r);
+ 24e:	85 e0       	ldi	r24, 0x05	; 5
+ 250:	33 df       	rcall	.-410    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:77
+  i2c_write(v >> 8);
+ 252:	80 e2       	ldi	r24, 0x20	; 32
+ 254:	31 df       	rcall	.-414    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:78
+  i2c_write(v & 0xFF);
+ 256:	80 e0       	ldi	r24, 0x00	; 0
+ 258:	2f df       	rcall	.-418    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:79
+  i2c_stop();
+ 25a:	4d df       	rcall	.-358    	; 0xf6 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:74
+  sda_hi();
+  return data;
+}
+
+void ina219_write(uint8_t r, uint16_t v) {
+  i2c_start();
+ 25c:	52 df       	rcall	.-348    	; 0x102 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:75
+  i2c_write(INA219_ADDR << 1);
+ 25e:	80 e8       	ldi	r24, 0x80	; 128
+ 260:	2b df       	rcall	.-426    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:76
+  i2c_write(r);
+ 262:	80 e0       	ldi	r24, 0x00	; 0
+ 264:	29 df       	rcall	.-430    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:77
+  i2c_write(v >> 8);
+ 266:	81 e0       	ldi	r24, 0x01	; 1
+ 268:	27 df       	rcall	.-434    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:78
+  i2c_write(v & 0xFF);
+ 26a:	8f e9       	ldi	r24, 0x9F	; 159
+ 26c:	25 df       	rcall	.-438    	; 0xb8 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:79
+  i2c_stop();
+ 26e:	43 df       	rcall	.-378    	; 0xf6 <i2c_stop()>
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:168
+
+  // format tegangan XX.XX V
+  if (voltage >= 10000) {
+    buf[0] = (voltage / 10000) % 10 + '0';
+  }else{
+    buf[0] = ' ';
+ 270:	40 e2       	ldi	r20, 0x20	; 32
+ 272:	34 2e       	mov	r3, r20
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:166
+  uint16_t voltage = ina219_get_mV();
+  int16_t current = ina219_get_uA();
+
+  // format tegangan XX.XX V
+  if (voltage >= 10000) {
+    buf[0] = (voltage / 10000) % 10 + '0';
+ 274:	50 e1       	ldi	r21, 0x10	; 16
+ 276:	65 2e       	mov	r6, r21
+ 278:	57 e2       	ldi	r21, 0x27	; 39
+ 27a:	75 2e       	mov	r7, r21
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:170
+  }else{
+    buf[0] = ' ';
+  }
+  buf[1] = (voltage / 1000) % 10 + '0';
+ 27c:	68 ee       	ldi	r22, 0xE8	; 232
+ 27e:	a6 2e       	mov	r10, r22
+ 280:	63 e0       	ldi	r22, 0x03	; 3
+ 282:	b6 2e       	mov	r11, r22
+ 284:	0a e0       	ldi	r16, 0x0A	; 10
+ 286:	10 e0       	ldi	r17, 0x00	; 0
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:171
+  buf[2] = '.';
+ 288:	7e e2       	ldi	r23, 0x2E	; 46
+ 28a:	57 2e       	mov	r5, r23
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:172
+  buf[3] = (voltage / 100) % 10 + '0';
+ 28c:	e4 e6       	ldi	r30, 0x64	; 100
+ 28e:	8e 2e       	mov	r8, r30
+ 290:	91 2c       	mov	r9, r1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:195
+  buf[index] = '\0';
+
+  lcd_setcursor(1, 0); lcd_print(buf);
+  lcd_setcursor(1, index + 1); lcd_print("mA");
+
+  PORTB ^= _BV(LED_PIN);
+ 292:	f0 e1       	ldi	r31, 0x10	; 16
+ 294:	4f 2e       	mov	r4, r31
+ina219_get_mV():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:94
+  hb = i2c_read(true);
+  lb = i2c_read(false);
+  i2c_stop();
+  return (hb << 8) | lb;
+}
+uint16_t ina219_get_mV() { return (ina219_read(0x02) >> 3) * 4; }
+ 296:	82 e0       	ldi	r24, 0x02	; 2
+ 298:	45 df       	rcall	.-374    	; 0x124 <ina219_read(unsigned char)>
+ 29a:	23 e0       	ldi	r18, 0x03	; 3
+ 29c:	96 95       	lsr	r25
+ 29e:	87 95       	ror	r24
+ 2a0:	2a 95       	dec	r18
+ 2a2:	e1 f7       	brne	.-8      	; 0x29c <main+0xe2>
+ 2a4:	7c 01       	movw	r14, r24
+ 2a6:	ee 0c       	add	r14, r14
+ 2a8:	ff 1c       	adc	r15, r15
+ 2aa:	ee 0c       	add	r14, r14
+ 2ac:	ff 1c       	adc	r15, r15
+ina219_get_uA():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:95
+int16_t ina219_get_uA() { return (int16_t)ina219_read(0x04); }
+ 2ae:	84 e0       	ldi	r24, 0x04	; 4
+ 2b0:	39 df       	rcall	.-398    	; 0x124 <ina219_read(unsigned char)>
+ 2b2:	6c 01       	movw	r12, r24
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:165
+  char buf[8];
+  uint16_t voltage = ina219_get_mV();
+  int16_t current = ina219_get_uA();
+
+  // format tegangan XX.XX V
+  if (voltage >= 10000) {
+ 2b4:	90 e1       	ldi	r25, 0x10	; 16
+ 2b6:	e9 16       	cp	r14, r25
+ 2b8:	97 e2       	ldi	r25, 0x27	; 39
+ 2ba:	f9 06       	cpc	r15, r25
+ 2bc:	08 f4       	brcc	.+2      	; 0x2c0 <main+0x106>
+ 2be:	94 c0       	rjmp	.+296    	; 0x3e8 <main+0x22e>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:166
+    buf[0] = (voltage / 10000) % 10 + '0';
+ 2c0:	c7 01       	movw	r24, r14
+ 2c2:	b3 01       	movw	r22, r6
+ 2c4:	9b d0       	rcall	.+310    	; 0x3fc <__udivmodhi4>
+ 2c6:	60 5d       	subi	r22, 0xD0	; 208
+ 2c8:	69 83       	std	Y+1, r22	; 0x01
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:170
+  }else{
+    buf[0] = ' ';
+  }
+  buf[1] = (voltage / 1000) % 10 + '0';
+ 2ca:	c7 01       	movw	r24, r14
+ 2cc:	b5 01       	movw	r22, r10
+ 2ce:	96 d0       	rcall	.+300    	; 0x3fc <__udivmodhi4>
+ 2d0:	cb 01       	movw	r24, r22
+ 2d2:	b8 01       	movw	r22, r16
+ 2d4:	93 d0       	rcall	.+294    	; 0x3fc <__udivmodhi4>
+ 2d6:	80 5d       	subi	r24, 0xD0	; 208
+ 2d8:	8a 83       	std	Y+2, r24	; 0x02
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:171
+  buf[2] = '.';
+ 2da:	5b 82       	std	Y+3, r5	; 0x03
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:172
+  buf[3] = (voltage / 100) % 10 + '0';
+ 2dc:	c7 01       	movw	r24, r14
+ 2de:	b4 01       	movw	r22, r8
+ 2e0:	8d d0       	rcall	.+282    	; 0x3fc <__udivmodhi4>
+ 2e2:	cb 01       	movw	r24, r22
+ 2e4:	b8 01       	movw	r22, r16
+ 2e6:	8a d0       	rcall	.+276    	; 0x3fc <__udivmodhi4>
+ 2e8:	80 5d       	subi	r24, 0xD0	; 208
+ 2ea:	8c 83       	std	Y+4, r24	; 0x04
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:173
+  buf[4] = (voltage / 10) % 10 + '0';
+ 2ec:	c7 01       	movw	r24, r14
+ 2ee:	b8 01       	movw	r22, r16
+ 2f0:	85 d0       	rcall	.+266    	; 0x3fc <__udivmodhi4>
+ 2f2:	cb 01       	movw	r24, r22
+ 2f4:	b8 01       	movw	r22, r16
+ 2f6:	82 d0       	rcall	.+260    	; 0x3fc <__udivmodhi4>
+ 2f8:	80 5d       	subi	r24, 0xD0	; 208
+ 2fa:	8d 83       	std	Y+5, r24	; 0x05
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:174
+  buf[5] = '\0';
+ 2fc:	1e 82       	std	Y+6, r1	; 0x06
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:176
+  // lcd_clear();
+  lcd_setcursor(0, 0); lcd_print(buf);
+ 2fe:	60 e0       	ldi	r22, 0x00	; 0
+ 300:	80 e0       	ldi	r24, 0x00	; 0
+ 302:	52 df       	rcall	.-348    	; 0x1a8 <lcd_setcursor(unsigned char, unsigned char)>
+ 304:	ce 01       	movw	r24, r28
+ 306:	01 96       	adiw	r24, 0x01	; 1
+ 308:	43 df       	rcall	.-378    	; 0x190 <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:177
+  lcd_setcursor(0, 6); lcd_print("V");
+ 30a:	66 e0       	ldi	r22, 0x06	; 6
+ 30c:	80 e0       	ldi	r24, 0x00	; 0
+ 30e:	4c df       	rcall	.-360    	; 0x1a8 <lcd_setcursor(unsigned char, unsigned char)>
+ 310:	84 e6       	ldi	r24, 0x64	; 100
+ 312:	90 e0       	ldi	r25, 0x00	; 0
+ 314:	3d df       	rcall	.-390    	; 0x190 <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:181
+
+  // format arus (hingga 99.9mA atau lebih) X.X, XX.X, atau XXX.X
+  uint8_t index = 0;
+  if (current >= 1000) {
+ 316:	28 ee       	ldi	r18, 0xE8	; 232
+ 318:	c2 16       	cp	r12, r18
+ 31a:	23 e0       	ldi	r18, 0x03	; 3
+ 31c:	d2 06       	cpc	r13, r18
+ 31e:	0c f4       	brge	.+2      	; 0x322 <main+0x168>
+ 320:	65 c0       	rjmp	.+202    	; 0x3ec <main+0x232>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:182
+    buf[index++] = (current / 1000) % 10 + '0';
+ 322:	c6 01       	movw	r24, r12
+ 324:	b5 01       	movw	r22, r10
+ 326:	7e d0       	rcall	.+252    	; 0x424 <__divmodhi4>
+ 328:	cb 01       	movw	r24, r22
+ 32a:	b8 01       	movw	r22, r16
+ 32c:	7b d0       	rcall	.+246    	; 0x424 <__divmodhi4>
+ 32e:	80 5d       	subi	r24, 0xD0	; 208
+ 330:	89 83       	std	Y+1, r24	; 0x01
+main():
+ 332:	e1 e0       	ldi	r30, 0x01	; 1
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:185
+  }
+  if (current >= 100) {
+    buf[index++] = (current / 100) % 10 + '0';
+ 334:	ff 24       	eor	r15, r15
+ 336:	f3 94       	inc	r15
+ 338:	fe 0e       	add	r15, r30
+ 33a:	81 e0       	ldi	r24, 0x01	; 1
+ 33c:	90 e0       	ldi	r25, 0x00	; 0
+ 33e:	8c 0f       	add	r24, r28
+ 340:	9d 1f       	adc	r25, r29
+ 342:	8e 0f       	add	r24, r30
+ 344:	91 1d       	adc	r25, r1
+ 346:	fc 01       	movw	r30, r24
+ 348:	c6 01       	movw	r24, r12
+ 34a:	b4 01       	movw	r22, r8
+ 34c:	6b d0       	rcall	.+214    	; 0x424 <__divmodhi4>
+ 34e:	cb 01       	movw	r24, r22
+ 350:	b8 01       	movw	r22, r16
+ 352:	68 d0       	rcall	.+208    	; 0x424 <__divmodhi4>
+ 354:	80 5d       	subi	r24, 0xD0	; 208
+ 356:	80 83       	st	Z, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:187
+  }
+  buf[index++] = (current / 10) % 10 + '0';
+ 358:	e1 e0       	ldi	r30, 0x01	; 1
+ 35a:	f0 e0       	ldi	r31, 0x00	; 0
+ 35c:	ec 0f       	add	r30, r28
+ 35e:	fd 1f       	adc	r31, r29
+ 360:	ef 0d       	add	r30, r15
+ 362:	f1 1d       	adc	r31, r1
+ 364:	c6 01       	movw	r24, r12
+ 366:	b8 01       	movw	r22, r16
+ 368:	5d d0       	rcall	.+186    	; 0x424 <__divmodhi4>
+ 36a:	28 2f       	mov	r18, r24
+ 36c:	cb 01       	movw	r24, r22
+ 36e:	b8 01       	movw	r22, r16
+ 370:	59 d0       	rcall	.+178    	; 0x424 <__divmodhi4>
+ 372:	80 5d       	subi	r24, 0xD0	; 208
+ 374:	80 83       	st	Z, r24
+ 376:	e1 e0       	ldi	r30, 0x01	; 1
+ 378:	ef 0d       	add	r30, r15
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:188
+  buf[index++] = '.';
+ 37a:	81 e0       	ldi	r24, 0x01	; 1
+ 37c:	90 e0       	ldi	r25, 0x00	; 0
+ 37e:	8c 0f       	add	r24, r28
+ 380:	9d 1f       	adc	r25, r29
+ 382:	8e 0f       	add	r24, r30
+ 384:	91 1d       	adc	r25, r1
+ 386:	fc 01       	movw	r30, r24
+ 388:	50 82       	st	Z, r5
+ 38a:	e2 e0       	ldi	r30, 0x02	; 2
+ 38c:	ef 0d       	add	r30, r15
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:189
+  buf[index++] = current % 10 + '0';
+ 38e:	81 e0       	ldi	r24, 0x01	; 1
+ 390:	90 e0       	ldi	r25, 0x00	; 0
+ 392:	8c 0f       	add	r24, r28
+ 394:	9d 1f       	adc	r25, r29
+ 396:	8e 0f       	add	r24, r30
+ 398:	91 1d       	adc	r25, r1
+ 39a:	fc 01       	movw	r30, r24
+ 39c:	20 5d       	subi	r18, 0xD0	; 208
+ 39e:	20 83       	st	Z, r18
+ 3a0:	e3 e0       	ldi	r30, 0x03	; 3
+ 3a2:	ef 0d       	add	r30, r15
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:190
+  buf[index] = '\0';
+ 3a4:	81 e0       	ldi	r24, 0x01	; 1
+ 3a6:	90 e0       	ldi	r25, 0x00	; 0
+ 3a8:	8c 0f       	add	r24, r28
+ 3aa:	9d 1f       	adc	r25, r29
+ 3ac:	8e 0f       	add	r24, r30
+ 3ae:	91 1d       	adc	r25, r1
+ 3b0:	fc 01       	movw	r30, r24
+ 3b2:	10 82       	st	Z, r1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:192
+
+  lcd_setcursor(1, 0); lcd_print(buf);
+ 3b4:	60 e0       	ldi	r22, 0x00	; 0
+ 3b6:	81 e0       	ldi	r24, 0x01	; 1
+ 3b8:	f7 de       	rcall	.-530    	; 0x1a8 <lcd_setcursor(unsigned char, unsigned char)>
+ 3ba:	ce 01       	movw	r24, r28
+ 3bc:	01 96       	adiw	r24, 0x01	; 1
+ 3be:	e8 de       	rcall	.-560    	; 0x190 <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:193
+  lcd_setcursor(1, index + 1); lcd_print("mA");
+ 3c0:	64 e0       	ldi	r22, 0x04	; 4
+ 3c2:	6f 0d       	add	r22, r15
+ 3c4:	81 e0       	ldi	r24, 0x01	; 1
+ 3c6:	f0 de       	rcall	.-544    	; 0x1a8 <lcd_setcursor(unsigned char, unsigned char)>
+ 3c8:	86 e6       	ldi	r24, 0x66	; 102
+ 3ca:	90 e0       	ldi	r25, 0x00	; 0
+ 3cc:	e1 de       	rcall	.-574    	; 0x190 <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:195
+
+  PORTB ^= _BV(LED_PIN);
+ 3ce:	88 b3       	in	r24, 0x18	; 24
+ 3d0:	84 25       	eor	r24, r4
+ 3d2:	88 bb       	out	0x18, r24	; 24
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 3d4:	9f e7       	ldi	r25, 0x7F	; 127
+ 3d6:	2f e4       	ldi	r18, 0x4F	; 79
+ 3d8:	82 e1       	ldi	r24, 0x12	; 18
+ 3da:	91 50       	subi	r25, 0x01	; 1
+ 3dc:	20 40       	sbci	r18, 0x00	; 0
+ 3de:	80 40       	sbci	r24, 0x00	; 0
+ 3e0:	e1 f7       	brne	.-8      	; 0x3da <main+0x220>
+ 3e2:	00 c0       	rjmp	.+0      	; 0x3e4 <main+0x22a>
+ 3e4:	00 00       	nop
+ 3e6:	57 cf       	rjmp	.-338    	; 0x296 <main+0xdc>
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:168
+
+  // format tegangan XX.XX V
+  if (voltage >= 10000) {
+    buf[0] = (voltage / 10000) % 10 + '0';
+  }else{
+    buf[0] = ' ';
+ 3e8:	39 82       	std	Y+1, r3	; 0x01
+ 3ea:	6f cf       	rjmp	.-290    	; 0x2ca <main+0x110>
+main():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:180
+  // lcd_clear();
+  lcd_setcursor(0, 0); lcd_print(buf);
+  lcd_setcursor(0, 6); lcd_print("V");
+
+  // format arus (hingga 99.9mA atau lebih) X.X, XX.X, atau XXX.X
+  uint8_t index = 0;
+ 3ec:	f1 2c       	mov	r15, r1
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:184
+  if (current >= 1000) {
+    buf[index++] = (current / 1000) % 10 + '0';
+  }
+  if (current >= 100) {
+ 3ee:	84 e6       	ldi	r24, 0x64	; 100
+ 3f0:	c8 16       	cp	r12, r24
+ 3f2:	d1 04       	cpc	r13, r1
+ 3f4:	0c f4       	brge	.+2      	; 0x3f8 <main+0x23e>
+ 3f6:	b0 cf       	rjmp	.-160    	; 0x358 <main+0x19e>
+main():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_i2c_LCD_INA219/ATtiny2313_i2c_LCD_INA219.ino:180
+  // lcd_clear();
+  lcd_setcursor(0, 0); lcd_print(buf);
+  lcd_setcursor(0, 6); lcd_print("V");
+
+  // format arus (hingga 99.9mA atau lebih) X.X, XX.X, atau XXX.X
+  uint8_t index = 0;
+ 3f8:	e0 e0       	ldi	r30, 0x00	; 0
+ 3fa:	9c cf       	rjmp	.-200    	; 0x334 <main+0x17a>
+
+000003fc <__udivmodhi4>:
+__udivmodhi4():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1408
+ 3fc:	aa 1b       	sub	r26, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1409
+ 3fe:	bb 1b       	sub	r27, r27
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1410
+ 400:	51 e1       	ldi	r21, 0x11	; 17
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1411
+ 402:	07 c0       	rjmp	.+14     	; 0x412 <__udivmodhi4_ep>
+
+00000404 <__udivmodhi4_loop>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1413
+ 404:	aa 1f       	adc	r26, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1414
+ 406:	bb 1f       	adc	r27, r27
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1415
+ 408:	a6 17       	cp	r26, r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1416
+ 40a:	b7 07       	cpc	r27, r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1417
+ 40c:	10 f0       	brcs	.+4      	; 0x412 <__udivmodhi4_ep>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1418
+ 40e:	a6 1b       	sub	r26, r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1419
+ 410:	b7 0b       	sbc	r27, r23
+
+00000412 <__udivmodhi4_ep>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1421
+ 412:	88 1f       	adc	r24, r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1422
+ 414:	99 1f       	adc	r25, r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1423
+ 416:	5a 95       	dec	r21
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1424
+ 418:	a9 f7       	brne	.-22     	; 0x404 <__udivmodhi4_loop>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1425
+ 41a:	80 95       	com	r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1426
+ 41c:	90 95       	com	r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1428
+ 41e:	bc 01       	movw	r22, r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1430
+ 420:	cd 01       	movw	r24, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1432
+ 422:	08 95       	ret
+
+00000424 <__divmodhi4>:
+__divmodhi4():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1440
+ 424:	97 fb       	bst	r25, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1441
+ 426:	07 2e       	mov	r0, r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1442
+ 428:	16 f4       	brtc	.+4      	; 0x42e <__divmodhi4+0xa>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1443
+ 42a:	00 94       	com	r0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1444
+ 42c:	06 d0       	rcall	.+12     	; 0x43a <__divmodhi4_neg1>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1446
+ 42e:	77 fd       	sbrc	r23, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1447
+ 430:	08 d0       	rcall	.+16     	; 0x442 <__divmodhi4_neg2>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1448
+ 432:	e4 df       	rcall	.-56     	; 0x3fc <__udivmodhi4>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1449
+ 434:	07 fc       	sbrc	r0, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1450
+ 436:	05 d0       	rcall	.+10     	; 0x442 <__divmodhi4_neg2>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1451
+ 438:	3e f4       	brtc	.+14     	; 0x448 <__divmodhi4_exit>
+
+0000043a <__divmodhi4_neg1>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1454
+ 43a:	90 95       	com	r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1455
+ 43c:	81 95       	neg	r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1456
+ 43e:	9f 4f       	sbci	r25, 0xFF	; 255
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1457
+ 440:	08 95       	ret
+
+00000442 <__divmodhi4_neg2>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1460
+ 442:	70 95       	com	r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1461
+ 444:	61 95       	neg	r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1462
+ 446:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000448 <__divmodhi4_exit>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1464
+ 448:	08 95       	ret
+
+0000044a <_exit>:
+exit():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+ 44a:	f8 94       	cli
+
+0000044c <__stop_program>:
+__stop_program():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+ 44c:	ff cf       	rjmp	.-2      	; 0x44c <__stop_program>

@@ -1,0 +1,771 @@
+/*
+  Update versi :
+  Calibrated Temp Sensor
+  Calculated Humidity
+  Keypad Input
+*/
+
+#include <Wire.h>
+#include <DHT.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <LiquidCrystal_I2C.h>
+#include <Keypad.h>
+#include "SdFat.h"
+#include "sdios.h"
+#include <RtcDS1307.h>
+#ifdef ARDUINO_ARCH_AVR
+  #include <avr/wdt.h>
+#endif
+
+// Delay sebelum mulai menulis Data Logger CSV (ms).
+// Jeda awal 3 detik untuk mempersiapkan sensor.
+const unsigned long STARTUP_LOG_DELAY_MS = 3000UL;
+unsigned long startupLogTime = 0; // di-setup() akan diisi = millis() + STARTUP_LOG_DELAY_MS
+
+// ========== Configuration ==========
+#define DHTTYPE DHT22
+const uint8_t DHT_PINS[4] = {49, 47, 45, 43};
+const uint8_t DS_PINS[12] = {28, 32, 40, 26, 30, 34, 46, 36, 42, 44, 48, 38};
+
+#define LCD_ADDR 0x27
+LiquidCrystal_I2C lcd(LCD_ADDR, 20, 4);
+bool lcdReady = true;
+
+// SD/SoftSPI pins (unchanged)
+const uint8_t SD_CS_PIN   = 10;
+const uint8_t SOFT_MISO_PIN = 12;
+const uint8_t SOFT_MOSI_PIN = 11;
+const uint8_t SOFT_SCK_PIN  = 13;
+SoftSpiDriver<SOFT_MISO_PIN, SOFT_MOSI_PIN, SOFT_SCK_PIN> softSpi;
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(0), &softSpi)
+
+// RTC instance
+RtcDS1307<TwoWire> Rtc(Wire);
+
+// ========== Tunables / constants (kept values) ==========
+volatile bool oneSecondTick = false;
+const unsigned long DS_CONV_DELAY_MS = 375UL; // 10-bit conversion
+const float OFF_VALUE = -127.0f;
+const uint16_t FLUSH_EVERY = 10;
+const uint8_t LED_TOGGLE_PIN = 2;  // toggle each saved line
+const uint8_t LED_SDERR_PIN  = 3;
+
+// ========== Globals ==========
+DHT* dht[4];
+
+#include <new>
+static uint8_t oneWireBuf[12][sizeof(OneWire)];
+static uint8_t dsBuf[12][sizeof(DallasTemperature)];
+OneWire* oneWireArr[12] = { nullptr };
+DallasTemperature* dsArr[12] = { nullptr };
+
+bool dsPresent[12] = {0};
+uint8_t dsAddr[12][8];
+uint8_t dsDetectCount[12] = {0};
+const uint8_t DETECT_THRESHOLD = 2;
+
+float dsTemps[12];
+float dhtT[4], dhtH[4];
+
+SdFat sd;
+SdFile logFile;
+bool sdAvailable = false;
+bool ledToggleState = false;
+uint16_t linesSinceFlush = 0;
+
+char logFileNameBuf[64] = {0};
+char logFileTimestampBuf[32] = {0};
+
+String displayMode = "ds"; // kept, but current LCD layout shows combined info
+
+// custom glyphs 10 11 12 13 14 15 dalam 1 kotak LCD
+byte customChar[6][8] = {
+  {0x17,0x15,0x15,0x15,0x15,0x15,0x17,0x00}   // glyph "10"
+ ,{0x12,0x12,0x12,0x12,0x12,0x12,0x12,0x00}   // glyph "11"
+ ,{0x17,0x15,0x11,0x11,0x12,0x14,0x17,0x00}   // glyph "12"
+ ,{0x17,0x15,0x11,0x13,0x11,0x15,0x17,0x00}   // glyph "13"
+ ,{0x15,0x15,0x15,0x17,0x11,0x11,0x11,0x00}   // glyph "14"
+ ,{0x17,0x14,0x14,0x17,0x11,0x15,0x17,0x00}   // glyph "15"
+};
+
+// ---- Keypad (3x4) ----
+const byte KP_ROWS = 4, KP_COLS = 3;
+char KEYS[KP_ROWS][KP_COLS] = {
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+  {'*','0','#'}
+};
+byte KP_ROW_PINS[KP_ROWS] = {39, 37, 35, 33}; // R0..R3
+byte KP_COL_PINS[KP_COLS] = {31, 29, 27};     // C0..C2
+Keypad keypad = Keypad(makeKeymap(KEYS), KP_ROW_PINS, KP_COL_PINS, KP_ROWS, KP_COLS);
+
+// ---- MDPL / Pressure state ----
+bool setupKetinggian = true;   // gate: true -> do MDPL input screen first
+bool reviewScreen = false;     // '*' toggles review screen during logging
+bool showRawScreen = false;    // '#' toggles RAW screen vs default
+String mdplInput = "";         // user-typed altitude string
+unsigned long blinkMillis = 0; // for blinking caret
+bool blinkOn = false;
+
+float valMDPL = 0.0f;
+float valPressureKPa = 101.325f;
+float valPressureMBar = 1013.250f;
+
+bool logHeaderWrittenV2 = false; // ensure header (with MDPL) written once
+
+// ========== Forward declarations (grouped) ==========
+// Helpers
+bool parseTimestampInput(const char* s, RtcDateTime &out);
+void makeFilenameFromRtcBuf(const RtcDateTime &dt, char *buf, size_t bufsize);
+void makeTimestampStrBuf(const RtcDateTime &dt, char *buf, size_t bufsize);
+
+// LCD
+bool tryInitLCD();
+bool isDeviceConnected(uint8_t address);
+void displayRtcTimestampSmall(const RtcDateTime &now); // prints HH:MM:SS and DD-MM-YY in top-right
+void displayRtcBlink(const RtcDateTime &now, bool diatas = false);  // prints blinking HH:MM at bottom-right or top-right
+
+// SD / RTC
+void dateTime(uint16_t* date, uint16_t* time, uint8_t* ms10);
+void openLogFileAndWriteHeader(const char* fname, const char* fileTimestamp);
+bool writeCsvLineAndToggle(const char* fileTimestamp, float dsVals[], float dhtTemps[], float dhtHums[]);
+
+// Sensor
+void initSensors();
+void readAllDHTs();        // read all DHT (we keep simple: read all per tick)
+void probeAndReadDS();     // probe presence / start conversions / read temps (non-blocking sequence)
+
+// Power / shutdown
+void safeShutdown();
+
+// Timer1
+void setupTimer1_1Hz();
+ISR(TIMER1_COMPA_vect);
+
+// --- Keypad / MDPL ---
+void handleMdplInputAndReview();
+void drawMdplInputScreen();
+void drawReviewScreen();
+void writeHeaderWithMdpl();
+void replaceDotWithComma(char *s);
+
+// --- Calculations (easy to tweak later) ---
+inline float calDry(float x);
+inline float calWet(float x);
+inline float satVP(float T);
+inline float psychroA(float Tw);
+bool writeCsvLineAndToggleV2(const char* fileTimestamp,
+                             float suhuRaw[4], float dryRaw[4], float wetRaw[4], float dhtHumRaw[4],
+                             float calDryV[4], float calWetV[4], float hrV[4]);
+
+// ========== Helper implementations ==========
+bool parseTimestampInput(const char* s, RtcDateTime &out) {
+  unsigned int Y, M, D, h, m, s2;
+  if (sscanf(s, "%u_%u_%u_%u_%u_%u", &Y, &M, &D, &h, &m, &s2) != 6) return false;
+  if (Y < 2000 || M < 1 || M > 12 || D < 1 || D > 31 || h > 23 || m > 59 || s2 > 59) return false;
+  out = RtcDateTime((uint16_t)Y, (uint8_t)M, (uint8_t)D, (uint8_t)h, (uint8_t)m, (uint8_t)s2);
+  return true;
+}
+
+void makeFilenameFromRtcBuf(const RtcDateTime &dt, char *buf, size_t bufsize) {
+  snprintf(buf, bufsize, "sensor_log_%04u_%02u_%02u_%02u_%02u_%02u.csv",
+           dt.Year(), dt.Month(), dt.Day(), dt.Hour(), dt.Minute(), dt.Second());
+}
+void makeTimestampStrBuf(const RtcDateTime &dt, char *buf, size_t bufsize) {
+  snprintf(buf, bufsize, "%04u-%02u-%02u;%02u:%02u:%02u", //YYYY-MM-DD HH:MM:SS
+           dt.Year(), dt.Month(), dt.Day(), dt.Hour(), dt.Minute(), dt.Second());
+}
+
+// ========== LCD helpers ==========
+bool tryInitLCD() {
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+  // create custom glyphs
+  for (int i = 0; i < 6; i++ )
+    lcd.createChar(i, customChar[i]);
+  return true;
+}
+
+bool isDeviceConnected(uint8_t address) {
+  Wire.beginTransmission(address);
+  return (Wire.endTransmission() == 0);
+}
+
+void displayRtcTimestampSmall(const RtcDateTime &now) {
+  // top-right small HH:MM:SS and date DD-MM-YY (rows 0..1)
+  // HH:MM:SS at row 0, cols 10..19
+  char tbuf[9];
+  snprintf(tbuf, sizeof(tbuf), "%02u:%02u:%02u", now.Hour(), now.Minute(), now.Second());
+  lcd.setCursor(10, 0);
+  lcd.print(tbuf);
+
+  char dateBuf[9];
+  uint8_t yy = (uint8_t)(now.Year() % 100);
+  snprintf(dateBuf, sizeof(dateBuf), "%02u-%02u-%02u",
+           now.Day(), now.Month(), yy);
+  lcd.setCursor(12, 1);
+  lcd.print(dateBuf);
+}
+
+// blinking H:MM at bottom-right using 4 LCD columns (cols 16..19 -> setCursor(15,3))
+// Uses custom glyphs 0..2 for hours 10,11,12 respectively.
+// 'now' is RtcDateTime captured once per tick.
+void displayRtcBlink(const RtcDateTime &now, bool diatas = false) {
+  // Convert to 12-hour format
+  uint8_t hour24 = now.Hour();
+  uint8_t hour12 = now.Hour() % 12;
+  if (hour24 == 12) hour12 = 12;          // 12 AM/PM
+  uint8_t minute = now.Minute();
+  uint8_t second = now.Second();
+  char colon = (second & 1) ? ' ' : ':';  // colon blink: even second -> show ':', odd -> space
+  char minTens  = '0' + (minute / 10);
+  char minUnits = '0' + (minute % 10);
+
+  if (diatas) lcd.setCursor(16, 0); else lcd.setCursor(16, 3);
+
+  // 1) Hour: either custom glyph for 10/11/12 or single digit '1'..'9'
+  if (hour12 >= 10 && hour12 <= 12) {
+    uint8_t glyphIndex = hour12 - 10; // 10->0, 11->1, 12->2
+    lcd.write(glyphIndex); // write custom glyph (one LCD cell)
+  } else {
+    // single digit hour (1..9)
+    lcd.print(hour12);
+  }
+
+  // 2) ':' or space
+  lcd.print(colon);
+
+  // 3) two-digit minutes
+  lcd.print(minTens);
+  lcd.print(minUnits);
+}
+
+// SD timestamp callback
+void dateTime(uint16_t* date, uint16_t* time, uint8_t* ms10) {
+  RtcDateTime now = Rtc.GetDateTime();
+  if (date) *date = FAT_DATE(now.Year(), now.Month(), now.Day());
+  if (time) *time = FAT_TIME(now.Hour(), now.Minute(), now.Second());
+  if (ms10) *ms10 = (now.Second() & 1) ? 100 : 0;
+}
+
+// ========== SD / Logging functions ==========
+void openLogFileAndWriteHeader(const char* fname, const char* fileTimestamp) {
+  if (!sdAvailable) return;
+  if (!logFile.open(fname, O_CREAT | O_RDWR | O_AT_END)) {
+    sdAvailable = false;
+    digitalWrite(LED_SDERR_PIN, HIGH);
+    Serial.println(F("SD: failed opening file for append."));
+    return;
+  }
+  logFile.println(F("sep=;")); // placeholder; will be rewritten with MDPL after input
+  // old header will be replaced by writeHeaderWithMdpl()
+  logFile.flush();
+}
+
+// CSV writing (old) — kept to avoid breaking references, not used in V2
+bool writeCsvLineAndToggle(const char* fileTimestamp, float dsVals[], float dhtTemps[], float dhtHums[]) {
+  return true;
+}
+
+// ========== Sensors ==========
+void initSensors() {
+  // DHT init (allocate safely on heap; do NOT overlap with OneWire buffers)
+  for (int i = 0; i < 4; i++) {
+    dht[i] = new DHT(DHT_PINS[i], DHTTYPE);
+    dht[i]->begin();
+  }
+// OneWire + Dallas init for each DS pin
+  for (int i = 0; i < 12; i++) {
+    oneWireArr[i] = new ((void*)oneWireBuf[i]) OneWire(DS_PINS[i]);
+    dsArr[i]      = new ((void*)dsBuf[i]) DallasTemperature(oneWireArr[i]);
+    dsArr[i]->begin();
+    dsArr[i]->setWaitForConversion(false);
+    dsPresent[i] = false;
+    dsDetectCount[i] = 0;
+    dsTemps[i] = OFF_VALUE;
+  }
+}
+
+void readAllDHTs() {
+  for (int i = 0; i < 4; i++) {
+    float t = dht[i]->readTemperature();
+    float h = dht[i]->readHumidity();
+    dhtT[i] = isnan(t) ? OFF_VALUE : t;
+    dhtH[i] = isnan(h) ? OFF_VALUE : h;
+  }
+}
+
+// The probing/conversion/read flow is simplified to fit this snippet
+unsigned long lastDsConvMs = 0;
+bool dsConvInProgress = false;
+void probeAndReadDS() {
+  unsigned long nowMs = millis();
+  if (!dsConvInProgress) {
+    for (int i = 0; i < 12; i++) dsArr[i]->requestTemperatures();
+    dsConvInProgress = true;
+    lastDsConvMs = nowMs;
+  }
+  if (dsConvInProgress && (nowMs - lastDsConvMs >= DS_CONV_DELAY_MS)) {
+    for (int i = 0; i < 12; i++) {
+      float v = dsArr[i]->getTempCByIndex(0);
+      dsTemps[i] = (v <= -120.0f || v >= 125.0f || isnan(v)) ? OFF_VALUE : v;
+    }
+    dsConvInProgress = false;
+  }
+}
+
+void safeShutdown() {
+  if (sdAvailable && logFile.isOpen()) {
+    logFile.flush();
+    logFile.sync();
+    logFile.close();
+  }
+  if (lcdReady) {
+    lcd.clear();
+    lcd.setCursor(0,1); lcd.print("Saving & Reset...");
+  }
+  delay(300);
+}
+
+void setupTimer1_1Hz() {
+  cli();
+  TCCR1A = 0;
+  TCCR1B = 0;
+  TCNT1 = 0;
+  OCR1A = 15624; // 1 Hz for 16 MHz with prescaler 1024
+  TCCR1B |= (1 << WGM12);
+  TCCR1B |= (1 << CS12) | (1 << CS10);
+  TIMSK1 |= (1 << OCIE1A);
+  sei();
+}
+ISR(TIMER1_COMPA_vect) {
+  oneSecondTick = true;
+}
+
+// ========== NEW: Calibration & Psychrometric calculations ==========
+inline float calDry(float x) {
+  // kalibSuhuDry = 0.029*(x^2) - 0.9207*x + 28.906
+  return 0.029f * x * x - 0.9207f * x + 28.906f;
+}
+inline float calWet(float x) {
+  // kalibSuhuWet = 0.0365*(x^2) - 1.698*x + 47.346
+  return 0.0365f * x * x - 1.698f * x + 47.346f;
+}
+inline float psychroA(float Tw) {
+  // valA = 0.00066 * (1 + 0.00115 * Tw)
+  return 0.00066f * (1.0f + 0.00115f * Tw);
+}
+inline float satVP(float T) {
+  // Common Magnus-type: 6.112 * e^( 17.502*T / (240.97 + T) )
+  return 6.112f * expf((17.502f * T) / (240.97f + T));
+}
+
+// ========== NEW: Utility to replace '.' with ',' for localized LCD text ==========
+void replaceDotWithComma(char *s) {
+  for (char *p = s; *p; ++p) if (*p == '.') *p = ',';
+}
+
+// ========== NEW: MDPL input & review screens ==========
+void drawMdplInputScreen() {
+  lcd.setCursor(0,0); lcd.print("Input ketinggian:");
+  // line 2: value with blinking block / digits
+  lcd.setCursor(0,1);
+  // Build "     x MDPL" -> we'll align to col 5 for value
+  lcd.print("     ");
+  // Determine display content
+  String disp = mdplInput;
+  if (blinkOn) disp += (char)255; else disp += (char)0x5F; // full block / white underscore
+  lcd.print(disp);
+  lcd.print(" MDPL ");
+  // line 4: hint
+  lcd.setCursor(0,3); lcd.print("* = backsp | # = OK");
+}
+
+void drawReviewScreen() {
+  lcd.clear();
+  // MDPL
+  lcd.setCursor(0,0); lcd.print("MDPL = "); lcd.print((long)valMDPL); lcd.print(" meter");
+  // Pressure with 3 decimals and comma as decimal separator
+  char kpa[24], mbar[24];
+  dtostrf(valPressureKPa, 0, 3, kpa);
+  dtostrf(valPressureMBar, 0, 3, mbar);
+  replaceDotWithComma(kpa);
+  replaceDotWithComma(mbar);
+  lcd.setCursor(0,1); lcd.print("Press=  "); lcd.print(kpa); lcd.print(" kPa");
+  lcd.setCursor(0,2); lcd.print("     = "); lcd.print(mbar); lcd.print(" mBar");
+  lcd.setCursor(0,3); lcd.print("* = view | # = reset");
+}
+
+// Handle MDPL input at boot, and '*' review toggle later
+void handleMdplInputAndReview() {
+  // Blink caret at ~500ms
+  if (millis() - blinkMillis >= 500) { blinkMillis = millis(); blinkOn = !blinkOn; }
+
+  char key = keypad.getKey();
+  if (setupKetinggian) {
+    // entering MDPL
+    if (key) {
+      if (key >= '0' && key <= '9') {
+        if (mdplInput.length() < 5) mdplInput += key; // up to 5 digits
+      } else if (key == '*') {
+        if (mdplInput.length() > 0) mdplInput.remove(mdplInput.length()-1);
+      } else if (key == '#') {
+        // finalize
+        valMDPL = mdplInput.length() ? mdplInput.toInt() : 0;
+        // Compute pressures
+        // valPressureKPa = 101.325 * (1 - 2.25577e-5 * valMDPL)^5.2559
+        float t = 1.0f - 2.25577e-5f * valMDPL;
+        valPressureKPa = 101.325f * powf(t, 5.2559f);
+        valPressureMBar = valPressureKPa * 10.0f;
+        // write header now (truncate and rewrite)
+        writeHeaderWithMdpl();
+        // Show review for 3s
+        drawReviewScreen();
+        delay(3000);
+        setupKetinggian = false;
+        reviewScreen = false;
+        lcd.clear();
+        return;
+      }
+    }
+    drawMdplInputScreen();
+    return;
+  } else {
+    // After running: handle review toggle & reset
+    if (key == '*') {
+      reviewScreen = !reviewScreen;
+      if (reviewScreen) {
+        drawReviewScreen();
+      } else {
+        lcd.clear(); // will be redrawn by main loop
+      }
+    } else if (key == '#' && reviewScreen) {
+      // Try soft reset
+      safeShutdown();  //flash logging file
+#ifdef ARDUINO_ARCH_AVR
+      wdt_enable(WDTO_15MS);
+      while (1) { }
+#else
+      // Fallback: go back to input flow and mark header not written so new file header is written again
+      setupKetinggian = true;
+      reviewScreen = false;
+      showRawScreen = false;
+      mdplInput = "";
+      logHeaderWrittenV2 = false;
+      lcd.clear();
+      drawMdplInputScreen();
+#endif
+    } else if (key == '#' && !reviewScreen) {
+      // toggle RAW/default screen
+      showRawScreen = !showRawScreen;
+    }
+  }
+}
+
+// ========== NEW: write header with MDPL lines ==========
+void writeHeaderWithMdpl() {
+  if (!sdAvailable) return;
+  if (!logFile.isOpen()) return;
+
+  // Start new file content for this run
+  logFile.rewind();
+  logFile.truncate(0);
+
+  logFile.println(F("sep=;"));
+  // second line with MDPL & pressures (with comma decimals)
+  char kpa[24], mbar[24];
+  dtostrf(valPressureKPa, 0, 3, kpa);
+  dtostrf(valPressureMBar, 0, 3, mbar);
+  replaceDotWithComma(kpa);
+  replaceDotWithComma(mbar);
+
+  char mdplLine[128];
+  snprintf(mdplLine, sizeof(mdplLine),
+           "valMDPL = %ld; valPressureKPa = %s; valPressureMBar = %s;",
+           (long)valMDPL, kpa, mbar);
+  logFile.println(mdplLine);
+
+  // Header columns:
+  // logDate;logTime;RAW_Suhu_1..4;RAW_Dry_1..4;RAW_Wet_1..4;RAW_Humi_1..4;Cal_Dry_1..4;Cal_Wet_1..4;Cal_Hr_1..4;
+  char header[512];
+  int p = 0;
+  p += snprintf(header + p, sizeof(header) - p, "logDate;logTime");
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";RAW_Suhu_%d", i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";RAW_Dry_%d",  i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";RAW_Wet_%d",  i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";RAW_Humi_%d", i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";Cal_Dry_%d",  i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";Cal_Wet_%d",  i+1);
+  for (int i=0;i<4;i++) p += snprintf(header + p, sizeof(header) - p, ";Cal_Hr_%d",   i+1);
+  p += snprintf(header + p, sizeof(header) - p, "\n");
+  logFile.write(header, p);
+  logFile.flush();
+  logHeaderWrittenV2 = true;
+}
+
+// ========== NEW: CSV line writer (V2) ==========
+bool writeCsvLineAndToggleV2(const char* fileTimestamp,
+                             float suhuRaw[4], float dryRaw[4], float wetRaw[4], float dhtHumRaw[4],
+                             float calDryV[4], float calWetV[4], float hrV[4]) {
+  if (!sdAvailable) return false;
+  if (!logFile.isOpen()) return false;
+
+  // still in MDPL input? do not log yet
+  if (setupKetinggian) return true;
+
+  char line[700];
+  int p = 0;
+  p += snprintf(line + p, sizeof(line) - p, "%s", fileTimestamp);
+
+  auto outVal = [&](float v) {
+    if (v == OFF_VALUE || isnan(v)) {
+      p += snprintf(line + p, sizeof(line) - p, ";OFF");
+    } else {
+      char tbuf[16];
+      dtostrf(v, 0, 2, tbuf);
+      p += snprintf(line + p, sizeof(line) - p, ";%s", tbuf);
+    }
+  };
+
+  for (int i=0;i<4;i++) outVal(suhuRaw[i]);
+  for (int i=0;i<4;i++) outVal(dryRaw[i]);
+  for (int i=0;i<4;i++) outVal(wetRaw[i]);
+  for (int i=0;i<4;i++) outVal(dhtHumRaw[i]);
+  for (int i=0;i<4;i++) outVal(calDryV[i]);
+  for (int i=0;i<4;i++) outVal(calWetV[i]);
+  for (int i=0;i<4;i++) outVal(hrV[i]);
+
+  p += snprintf(line + p, sizeof(line) - p, "\n");
+
+  if (logFile.write(line, p) != p) {
+    return false;
+  }
+
+  linesSinceFlush++;
+  if (linesSinceFlush >= FLUSH_EVERY) {
+    logFile.flush();
+    linesSinceFlush = 0;
+  }
+
+  // toggle indicator LED
+  ledToggleState = !ledToggleState;
+  digitalWrite(LED_TOGGLE_PIN, ledToggleState ? HIGH : LOW);
+  return true;
+}
+
+// ========== Setup / Loop ==========
+void setup() {
+  Serial.begin(115200);
+  while (!Serial && millis() < 1000) ; // small wait
+
+  // initialize LCD early
+  tryInitLCD();
+
+  lcd.setCursor(0,0); lcd.print(" Data Logger Sensor ");
+  lcd.setCursor(0,1); lcd.print(" Suhu & Kelembapan  ");
+  lcd.setCursor(0,2); lcd.print("----Start System----");
+  lcd.setCursor(0,3); lcd.print("Initializing sensors");
+
+  // LED pins
+  pinMode(LED_TOGGLE_PIN, OUTPUT);
+  pinMode(LED_SDERR_PIN, OUTPUT);
+
+  Wire.begin();
+  Rtc.Begin();
+
+  initSensors();
+
+  setupTimer1_1Hz();
+
+  startupLogTime = millis() + STARTUP_LOG_DELAY_MS;
+
+  // RTC check
+  if (!Rtc.IsDateTimeValid()) {
+    lcd.setCursor(0,3); lcd.print("RTC invalid, set...");
+    RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
+    Rtc.SetDateTime(compiled);
+  } else {
+    RtcDateTime now = Rtc.GetDateTime();
+    char ts[22];
+    makeTimestampStrBuf(now, ts, sizeof(ts));
+    lcd.setCursor(0,3); lcd.print(ts);
+    delay(1000);
+  }
+
+  // SD init & timestamp callback registration
+  lcd.setCursor(0,3); lcd.print("Preparing SDcard... ");
+  // register SdFat timestamp callback
+  SdFile::dateTimeCallback(dateTime);
+
+  if (!sd.begin(SD_CONFIG)) {
+    sdAvailable = false;
+    lcd.setCursor(0,3); lcd.print("SD init FAILED      ");
+    Serial.println(F("SD init FAILED"));
+    digitalWrite(LED_SDERR_PIN, HIGH);
+  } else {
+    sdAvailable = true;
+    digitalWrite(LED_SDERR_PIN, LOW);
+    Serial.println(F("SD init OK"));
+    RtcDateTime now = Rtc.GetDateTime();
+    if (Rtc.IsDateTimeValid()) {
+      makeFilenameFromRtcBuf(now, logFileNameBuf, sizeof(logFileNameBuf));
+      makeTimestampStrBuf(now, logFileTimestampBuf, sizeof(logFileTimestampBuf));
+    } else {
+      unsigned long t = millis() / 1000UL;
+      snprintf(logFileNameBuf, sizeof(logFileNameBuf), "sensor_log_millis_%lu.csv", t);
+      snprintf(logFileTimestampBuf, sizeof(logFileTimestampBuf), "millis_%lu", t);
+    }
+    // Create file & placeholder header; MDPL header will be written later
+    openLogFileAndWriteHeader(logFileNameBuf, logFileTimestampBuf);
+    if (!logFile.isOpen()) {
+      sdAvailable = false;
+      digitalWrite(LED_SDERR_PIN, HIGH);
+      Serial.println(F("SD: failed opening file for append."));
+    } else {
+      Serial.print(F("Logging to file: "));
+      Serial.println(logFileNameBuf);
+    }
+  }
+
+  lcd.clear();
+  // Immediately show MDPL input screen
+  drawMdplInputScreen();
+  probeAndReadDS();  // menghemat waktu inputScreen sekaligus request sensor read
+}
+
+void loop() {
+  // serial commands (optional minimal shell)
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    cmd.trim();
+    if (cmd.startsWith("settime")) {
+      int sp = cmd.indexOf(' ');
+      if (sp > 0) {
+        String timestr = cmd.substring(sp + 1);
+        RtcDateTime dt(2000,1,1,0,0,0);
+        if (parseTimestampInput(timestr.c_str(), dt)) {
+          Rtc.SetDateTime(dt);
+          Serial.print(F("RTC set to: ")); Serial.println(timestr);
+        } else {
+          Serial.println(F("Bad settime format. Use: settime YYYY_MM_DD_HH_MM_SS"));
+        }
+      } else {
+        Serial.print(F("Unknown cmd: ")); Serial.println(cmd);
+      }
+    }
+  }
+
+  // wait for 1Hz tick
+  if (!oneSecondTick) return;
+  oneSecondTick = false;
+
+  // capture time once per tick and reuse
+  RtcDateTime now = Rtc.GetDateTime();
+  // --- Handle keypad & MDPL input / review toggles
+  handleMdplInputAndReview();
+  if (setupKetinggian) {
+    // Still on MDPL input UI; skip sensor display/logging
+    return;
+  }
+
+  // sensor operations
+  readAllDHTs();     // read all DHTs (kept simple)
+  probeAndReadDS();  // probe & read DS (non-blocking conversion handled inside)
+
+  // --- Compute calibration and HR values
+  float suhuRaw[4], dryRaw[4], wetRaw[4], dhtHumRaw[4];
+  for (int i=0;i<4;i++) {
+    suhuRaw[i] = dsTemps[i];
+    dryRaw[i]  = dsTemps[4+i];
+    wetRaw[i]  = dsTemps[8+i];
+    dhtHumRaw[i] = dhtH[i];
+  }
+
+  float calDryV[4], calWetV[4], hrV[4];
+  for (int i=0;i<4;i++) {
+    if (dryRaw[i] != OFF_VALUE) calDryV[i] = calDry(dryRaw[i]); else calDryV[i] = OFF_VALUE;
+    if (wetRaw[i] != OFF_VALUE) calWetV[i] = calWet(wetRaw[i]); else calWetV[i] = OFF_VALUE;
+
+    if (calDryV[i] == OFF_VALUE || calWetV[i] == OFF_VALUE) {
+      hrV[i] = OFF_VALUE;
+    } else {
+      float Ew = satVP(calWetV[i]);
+      float Ed = satVP(calDryV[i]);
+      float A  = psychroA(calWetV[i]);
+      float hr = ((Ew - (A * valPressureMBar * (calWetV[i] - calDryV[i])))/Ed) * 100.0f;
+      if (hr < 0) hr = 0; if (hr > 100) hr = 100;
+      hrV[i] = hr;
+    }
+  }
+
+  // --- LCD rendering: default vs RAW
+  if (reviewScreen) {
+    // already drawn in handler; keep blinking clock 
+    displayRtcBlink(now,reviewScreen);  // jika review maka clock ada diatas.
+  } else if (!showRawScreen) {
+    // Default:
+    // Row1: suhu1..4
+    lcd.setCursor(0,0);
+    for (int i=0;i<4;i++){ 
+      if (suhuRaw[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(suhuRaw[i],1)); lcd.print(' '); }
+    }
+    // Row2: calDry1..4
+    lcd.setCursor(0,1);
+    for (int i=0;i<4;i++){ 
+      if (calDryV[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(calDryV[i],1)); lcd.print(' '); }
+    }
+    // Row3: calWet1..4
+    lcd.setCursor(0,2);
+    for (int i=0;i<4;i++){ 
+      if (calWetV[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(calWetV[i],1)); lcd.print(' '); }
+    }
+    // Row4: valHr1..4 + clock
+    lcd.setCursor(0,3);
+    for (int i=0;i<4;i++){ 
+      if (hrV[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(hrV[i],0)); lcd.print('%'); lcd.print(' '); }
+    }
+    displayRtcBlink(now);
+  } else {
+    // RAW screen
+    lcd.setCursor(0,0);
+    for (int i=0;i<4;i++){ 
+      if (suhuRaw[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(suhuRaw[i],1)); lcd.print(' '); }
+    }
+    lcd.setCursor(0,1);
+    for (int i=0;i<4;i++){ 
+      if (dryRaw[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(dryRaw[i],1)); lcd.print(' '); }
+    }
+    lcd.setCursor(0,2);
+    for (int i=0;i<4;i++){ 
+      if (wetRaw[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(wetRaw[i],1)); lcd.print(' '); }
+    }
+    lcd.setCursor(0,3);
+    for (int i=0;i<4;i++){ 
+      if (dhtHumRaw[i]==OFF_VALUE) { lcd.print("OFF "); } else { lcd.print(String(dhtHumRaw[i],0)); lcd.print('%'); lcd.print(' '); }
+    }
+    // mark RAW at end
+    lcd.setCursor(16,3); lcd.print(" RAW"); // 4 kotak untuk menghapus bekas jam
+  }
+
+  // --- Logging (V2)
+  if (sdAvailable && logFile.isOpen()) {
+    makeTimestampStrBuf(now, logFileTimestampBuf, sizeof(logFileTimestampBuf));
+    if (!logHeaderWrittenV2) {
+      // In case MDPL was entered after SD init, ensure header exists
+      writeHeaderWithMdpl();
+    }
+    bool ok = writeCsvLineAndToggleV2(logFileTimestampBuf, suhuRaw, dryRaw, wetRaw, dhtHumRaw, calDryV, calWetV, hrV);
+    if (!ok) {
+      sdAvailable = false;
+      digitalWrite(LED_SDERR_PIN, HIGH);
+      Serial.println(F("SD write failed, disabling SD."));
+    }
+  } else {
+    digitalWrite(LED_SDERR_PIN, HIGH);
+  }
+}
+
+// ========== End of program ==========

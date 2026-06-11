@@ -1,0 +1,268 @@
+/*************** SERVER: ESP32-S2 LOLIN S2 Mini = USB HID + ESP-NOW (with smoothing/gap-fill) ***************/
+#include <Arduino.h>
+#include <WiFi.h>
+#include <esp_now.h>
+#include <esp_wifi.h>
+
+#include "USB.h"
+#include "USBHIDKeyboard.h"
+#include "USBHIDMouse.h"
+
+USBHIDKeyboard Keyboard;
+USBHIDMouse Mouse;
+
+// ===================== CONFIG MAC =====================
+static uint8_t REMOTE_MAC[6] = { 0x44,0x1D,0x64,0xBC,0x1E,0x80 }; // <-- sesuaikan jika beda
+
+// ===================== PINOUT ========================
+#ifndef LED_BUILTIN
+  #define LED_BUILTIN 15  // LOLIN S2 Mini typical
+#endif
+#define BTN_TOGGLE 39     // eksternal pull-up 10k ke 3V3, tombol ke GND
+
+// ===================== TIMING ========================
+const uint32_t HEARTBEAT_PERIOD_MS = 200;  // kirim status ke remote
+const uint32_t REMOTE_TIMEOUT_MS   = 1000; // bila tak ada paket
+const uint32_t LED_BLINK_FAST_MS   = 100;  // disconnect
+const uint32_t LED_BLINK_SLOW_MS   = 500;  // enabled
+const uint32_t HID_STEP_MS         = 5;    // periode output micro-step smoothing (~200 Hz)
+
+// (Opsional) kunci channel agar sejalan dengan remote (mis. ch 11)
+#define LOCK_WIFI_CHANNEL 1
+const uint8_t WIFI_CH = 11;
+
+// ===================== PROTOKOL ======================
+#pragma pack(push,1)
+struct MouseMsg {
+  int16_t dx;
+  int16_t dy;
+  uint8_t buttons;  // bit0=Left
+  uint8_t back;     // 1=Back
+  uint8_t seq;
+};
+struct StatusMsg {
+  uint8_t enabled;
+  uint8_t reserved[3];
+};
+#pragma pack(pop)
+
+// ===================== STATE =========================
+volatile uint32_t lastRemoteMs = 0;
+static bool enabledControl = true;
+
+static inline bool remoteConnected() {
+  return (millis() - lastRemoteMs) < REMOTE_TIMEOUT_MS;
+}
+
+// ===================== GAP-FILL SMOOTHING ============
+static uint8_t  expectedSeq = 0;
+static bool     seqInit     = false;
+static int32_t  smoothResX  = 0, smoothResY = 0; // reservoir delta yang akan didistribusi
+static uint8_t  smoothLeft  = 0;                 // berapa frame lagi micro-step
+static const uint8_t MAX_SMOOTH_FRAMES = 6;      // batasi smoothing supaya tidak terlalu panjang
+
+static inline uint8_t seqGap(uint8_t got, uint8_t expect) {
+  return (uint8_t)(got - expect); // modulo-256
+}
+
+static void feedSmoothing(int16_t dx, int16_t dy, uint8_t rxSeq) {
+  if (!seqInit) {
+    expectedSeq = rxSeq + 1;
+    seqInit = true;
+    smoothResX += dx; smoothResY += dy;
+    smoothLeft = 1;
+    return;
+  }
+  uint8_t gap = seqGap(rxSeq, expectedSeq);
+  expectedSeq = rxSeq + 1;
+
+  // tambahkan delta baru ke reservoir
+  smoothResX += dx;
+  smoothResY += dy;
+
+  // bagi jadi beberapa micro-step: 1 (frame ini) + gap hilang, dibatasi MAX_SMOOTH_FRAMES
+  uint8_t frames = 1 + gap;
+  if (frames > MAX_SMOOTH_FRAMES) frames = MAX_SMOOTH_FRAMES;
+  smoothLeft = frames;
+}
+
+static void getSmoothedDelta(int16_t& outDx, int16_t& outDy) {
+  if (smoothLeft == 0) { outDx = 0; outDy = 0; return; }
+  int32_t stepX = (smoothResX / (int32_t)smoothLeft);
+  int32_t stepY = (smoothResY / (int32_t)smoothLeft);
+  if (stepX == 0 && smoothResX != 0) stepX = (smoothResX > 0) ? 1 : -1;
+  if (stepY == 0 && smoothResY != 0) stepY = (smoothResY > 0) ? 1 : -1;
+  outDx = (int16_t)stepX;
+  outDy = (int16_t)stepY;
+  smoothResX -= stepX;
+  smoothResY -= stepY;
+  smoothLeft--;
+}
+
+// ===================== LED STATUS ====================
+void driveStatusLED() {
+  static uint32_t ledBlinkMs = 0;
+  static bool ledOn = false;
+  const uint32_t now = millis();
+
+  if (!remoteConnected()) {
+    // fast blink
+    if (now - ledBlinkMs >= LED_BLINK_FAST_MS) {
+      ledBlinkMs = now; ledOn = !ledOn;
+      digitalWrite(LED_BUILTIN, ledOn);
+    }
+    return;
+  }
+
+  if (!enabledControl) {
+    digitalWrite(LED_BUILTIN, HIGH); // solid ON saat disabled (indikator)
+  } else {
+    // slow blink saat enabled
+    if (now - ledBlinkMs >= LED_BLINK_SLOW_MS) {
+      ledBlinkMs = now; ledOn = !ledOn;
+      digitalWrite(LED_BUILTIN, ledOn);
+    }
+  }
+}
+
+// ===================== BTN TOGGLE ====================
+const uint32_t BTN_DEBOUNCE_MS = 30;
+static bool lastBtn = true; // pull-up, aktif low
+static bool curBtn  = true;
+static uint32_t btnChangeMs = 0;
+
+void pollToggleButton() {
+  bool raw = digitalRead(BTN_TOGGLE);
+  if (raw != lastBtn) { lastBtn = raw; btnChangeMs = millis(); }
+  else if ((millis() - btnChangeMs) > BTN_DEBOUNCE_MS) {
+    if (curBtn != raw) {
+      curBtn = raw;
+      if (curBtn == LOW) {
+        enabledControl = !enabledControl;
+        // (opsional) kirim kombinasi keyboard untuk indikasi
+        Keyboard.press(KEY_LEFT_ALT);
+        delay(2);
+        Keyboard.press(KEY_TAB);
+        delay(2);
+        Keyboard.release(KEY_TAB);
+        delay(2);
+        Keyboard.release(KEY_LEFT_ALT);
+        delay(2);
+        Keyboard.releaseAll();
+      }
+    }
+  }
+}
+
+// ===================== ESPNOW ========================
+static void onDataSent(const uint8_t*, esp_now_send_status_t) {}
+
+static void onDataRecv(const uint8_t* mac, const uint8_t* data, int len) {
+  if (len != sizeof(MouseMsg)) return;
+  lastRemoteMs = millis();
+  const MouseMsg* m = (const MouseMsg*)data;
+
+  // tombol langsung diaplikasikan (tanpa smoothing)
+  bool leftDown = (m->buttons & 0x01) != 0;
+  if (enabledControl) {
+    if (leftDown) Mouse.press(MOUSE_LEFT); else Mouse.release(MOUSE_LEFT);
+    // tombol "back" bisa dimap ke KEY_BROWSER_BACK atau Alt+Left (contoh)
+    if (m->back) {
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.press(KEY_LEFT_ARROW);
+      delay(3);
+      Keyboard.release(KEY_LEFT_ARROW);
+      Keyboard.release(KEY_LEFT_ALT);
+    }
+  }
+
+  // gerak masuk ke smoothing
+  if (enabledControl) {
+    feedSmoothing(m->dx, m->dy, m->seq);
+  } else {
+    // kalau disabled, kosongkan reservoir supaya tidak meledak saat enable lagi
+    smoothResX = smoothResY = 0;
+    smoothLeft = 0;
+    seqInit = false;
+  }
+}
+
+static void sendStatus() {
+  StatusMsg s{};
+  s.enabled = enabledControl ? 1 : 0;
+  esp_now_send(REMOTE_MAC, (uint8_t*)&s, sizeof(s));
+}
+
+// ===================== SETUP =========================
+uint32_t lastHbMs = 0;
+uint32_t lastHidMs = 0;
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);
+  pinMode(BTN_TOGGLE, INPUT_PULLUP); // eksternal pull-up 10k
+
+  Serial.begin(115200);
+
+  // USB HID
+  USB.begin();
+  Keyboard.begin();
+  Mouse.begin();
+
+  // WiFi + ESPNOW
+  WiFi.mode(WIFI_STA);
+  WiFi.setSleep(false);
+
+  // Maksimalkan daya pancar & aktifkan LR
+  WiFi.setTxPower(WIFI_POWER_19_5dBm);
+  WiFi.enableLongRange(true);
+
+#if LOCK_WIFI_CHANNEL
+  // Kunci ke channel tertentu (samakan dengan remote)
+  esp_wifi_set_channel(WIFI_CH, WIFI_SECOND_CHAN_NONE);
+  uint8_t ch; wifi_second_chan_t sec;
+  esp_wifi_get_channel(&ch, &sec);
+  Serial.printf("Server locked channel: %u (sec=%d)\n", ch, (int)sec);
+#endif
+
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("ESP-NOW init failed");
+    while (1) { delay(100); }
+  }
+  esp_now_register_send_cb(onDataSent);
+  esp_now_register_recv_cb(onDataRecv);
+
+  // Tambah peer remote
+  esp_now_peer_info_t peer{};
+  memcpy(peer.peer_addr, REMOTE_MAC, 6);
+  peer.channel = 0; // pakai channel Wi-Fi aktif
+  peer.encrypt = false;
+  if (esp_now_add_peer(&peer) != ESP_OK) {
+    Serial.println("Add peer failed");
+  }
+
+  enabledControl = true; // default enable
+}
+
+// ===================== LOOP ==========================
+void loop() {
+  pollToggleButton();
+  driveStatusLED();
+
+  // Jalankan output HID smoothing periodik
+  const uint32_t now = millis();
+  if (now - lastHidMs >= HID_STEP_MS) {
+    lastHidMs = now;
+    int16_t dx, dy;
+    getSmoothedDelta(dx, dy);
+    if (enabledControl && (dx != 0 || dy != 0)) {
+      Mouse.move(dx, dy, 0);
+    }
+  }
+
+  // Heartbeat ke remote
+  if (now - lastHbMs >= HEARTBEAT_PERIOD_MS) {
+    lastHbMs = now;
+    sendStatus();
+  }
+}

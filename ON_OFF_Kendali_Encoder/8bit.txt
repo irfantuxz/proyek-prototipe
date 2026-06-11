@@ -1,0 +1,275 @@
+// Project: Modular ON-OFF & PWM Motor Controller
+#include <LiquidCrystal_I2C.h>        // ver.1.1.2 Frank de brabander
+#include <ResponsiveAnalogRead.h>     // ver.1.2.1 Damien Clarke
+
+// DEFINISI PIN & KONSTANTA
+const uint8_t PIN_ENCODER_A      = 2;  // rotary encoder A (Hardware Interupt)
+const uint8_t PIN_BTN_MODE       = 5;  // push button MODE
+const uint8_t PIN_BTN_START_STOP = 6;  // push button Start/Stop
+const uint8_t PIN_MOTOR          = 9;  // PIN D9 untuk HARDWARE PWM TIMER1 (SILENT PWM 31.3kHz)
+const uint8_t PIN_POT_SP         = A0; // knop potensio SetPoint
+const uint8_t PIN_POT_DB         = A1; // knop potensio DeadBand
+// Terapkan ke semua konstanta PIN
+
+// VARIABEL GLOBAL & OBJEK
+const int STEPS_PER_REV = 270;     // Jumlah Step encoder per 1x putaran
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+byte plusminus[8] = {0x4,0x4,0x1f,0x4,0x4,0x0,0x1f,0x0};
+
+// Objek Filter ADC (Parameter 'true' mengaktifkan mode sleep agar lebih stabil)
+ResponsiveAnalogRead potSP(PIN_POT_SP, true);
+ResponsiveAnalogRead potDB(PIN_POT_DB, true);
+
+// Variabel Interrupt
+volatile uint8_t currentMode = 1;
+volatile unsigned long lastButtonTime = 0;
+volatile uint16_t pulseCount = 0;
+uint16_t lastPulseCount = 0;
+
+// Variabel Sistem Timer
+unsigned long previousMillis = 0;
+const long calcInterval = 200; 
+long lastDisplayTime = 0;
+
+// Variabel Kontrol
+uint8_t waktuJeda = 0;
+bool tadiPWMnaik = false; // Status PWM naik atau turun
+bool motorAktif = false;  // Status motor (ON) / (OFF)
+uint16_t pwmMotor = 0;    // pwm output ke motor
+uint16_t currentRPM = 0;
+uint16_t setPoint = 0;
+uint16_t deadBand = 0;
+
+// INTERRUPT SERVICE ROUTINES (ISR)
+void encoderISR() {
+  pulseCount++;
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(PIN_ENCODER_A, INPUT_PULLUP);
+  pinMode(PIN_BTN_MODE, INPUT_PULLUP);
+  pinMode(PIN_BTN_START_STOP, INPUT_PULLUP);
+  pinMode(PIN_MOTOR, OUTPUT);
+  analogWrite(PIN_MOTOR, 0);
+  potSP.enableEdgeSnap();
+  potDB.enableEdgeSnap();
+
+  // Manipulasi Register Timer1 untuk Silent PWM (31.372 kHz) di Pin 9 & 10
+  // Memodifikasi 3 bit prescaler terbawah menjadi 001 (Prescaler 1)
+  TCCR1B = (TCCR1B & 0b11111000) | 0x01;
+
+  attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_A), encoderISR, CHANGE);
+
+  lcd.init(); 
+  lcd.backlight();
+  lcd.createChar(0, plusminus);
+  lcd.setCursor(0,1);
+  lcd.print("ON-OFF Speed Control");
+  delay(1000);
+  lcd.clear();
+}
+
+void loop() {
+  static uint8_t lastExecutedMode = 0;
+  
+  if (currentMode != lastExecutedMode) {
+    lcd.clear();
+    pwmMotor = 0; // Reset integrator PWM saat pindah mode
+    analogWrite(PIN_MOTOR, 0); 
+    lastExecutedMode = currentMode;
+  }
+
+  bacaTombol();
+  bacaSensorAnalog();
+  kalkulasiDanKontrol();
+}
+
+// MODUL INPUT & PEMBACAAN
+void bacaTombol() {
+  unsigned long currentMillis = millis();
+  
+  // Deteksi tekanan tombol dengan interval debounce 2 detik
+  if (currentMillis - lastButtonTime >= 1500) {
+    // Tombol START_STOP
+    if (digitalRead(PIN_BTN_START_STOP) == LOW) {
+      lastButtonTime = currentMillis;
+      motorAktif = !motorAktif; // Toggle status
+      if (motorAktif) pwmMotor = 50;  // saat start langsung ke 50 pwm - karena respon motor baru mulai di 50 @ 31.3 kHz
+    }
+    // Tombol MODE
+    if (digitalRead(PIN_BTN_MODE) == LOW) { 
+      lastButtonTime = currentMillis;
+      currentMode++;
+      if (currentMode > 3) currentMode = 1;
+      motorAktif = false;
+    }
+  }
+
+}
+
+void bacaSensorAnalog() {
+  potSP.update();
+  potDB.update();
+  
+  // 1. Dapatkan nilai mentah hasil mapping dari ADC (0-1023) ke rentang target
+  int rawSP = map(potSP.getValue(), 0, 1023, 0, 500);
+  int rawDB = map(potDB.getValue(), 0, 1023, 0, 150);
+
+  // 2. Terapkan logika Snap Kelipatan 10 sesuai mode yang aktif
+  if (currentMode >= 2) {
+    // Membulatkan ke kelipatan 10 terdekat
+    setPoint = ((rawSP + 2) / 10) * 10;
+    deadBand = ((rawDB + 2) / 10) * 10;
+  } else {
+    // Mode 1: Biarkan pembacaan linier (walaupun SP/DB tidak ditampilkan)
+    setPoint = rawSP;
+    deadBand = rawDB;
+  }
+}
+
+// MODUL KALKULASI & KONTROL
+void kalkulasiDanKontrol() {
+  unsigned long currentMillis = millis();
+  
+  if (currentMillis - previousMillis >= calcInterval) {
+    noInterrupts();
+    unsigned long currentPulses = pulseCount; 
+    interrupts();
+
+    unsigned long deltaSteps = currentPulses - lastPulseCount;
+    
+    // Casting perhitungan float ke (int)
+    //currentRPM = (int)(((float)deltaSteps / STEPS_PER_REV) * (60000.0 / calcInterval));
+    //currentRPM = (int)(((float)deltaSteps / 270) * (60000.0 / 200));
+    currentRPM = (deltaSteps * 10) / 9;
+    
+    lastPulseCount = currentPulses;
+    previousMillis = currentMillis;
+
+    // Hanya jalankan kendali motor jika status sistem ON
+    if (motorAktif) {
+      eksekusiLogikaMotor();
+    } else {
+      // Pastikan pin benar-benar LOW (OFF)
+      pwmMotor = 0;
+      analogWrite(PIN_MOTOR, 0);
+      digitalWrite(LED_BUILTIN, false);
+    }
+    
+    // Batasi update layar 3x per detik
+    if (currentMillis - lastDisplayTime >= 250) {
+      updateDisplay();
+      lastDisplayTime = currentMillis;
+    }
+  }
+}
+
+void eksekusiLogikaMotor() {
+  if (currentMode == 1) {
+    pwmMotor = map(potSP.getValue(), 0, 1050, 50, 255);
+    tadiPWMnaik = true;
+  } 
+  else if (currentMode == 2) {
+    if (currentRPM < setPoint) {
+      pwmMotor++; 
+      tadiPWMnaik = true;
+    } else {
+      if (waktuJeda == 0) {
+        waktuJeda = 3;
+      } else if (waktuJeda == 1) {
+        tadiPWMnaik = false;
+        pwmMotor -= 20;
+      }
+    }
+  } 
+  else if (currentMode == 3) {
+    int bBawah = setPoint - (deadBand / 2);
+    int bAtas  = setPoint + (deadBand / 2);
+    
+    if (currentRPM < bBawah){
+      tadiPWMnaik = true;
+      pwmMotor++;
+    } 
+    else if (currentRPM == bBawah) {
+      if (!tadiPWMnaik) {
+        if (waktuJeda == 0) {
+          waktuJeda = 3;
+        } else if (waktuJeda == 1) {
+          tadiPWMnaik = true;
+          pwmMotor+=5;
+        }
+      } else {
+          tadiPWMnaik = true;
+          pwmMotor++;
+      }
+    }
+    else if (currentRPM > bAtas){
+      tadiPWMnaik = false;
+      pwmMotor--;
+    }
+    else if (currentRPM == bAtas) {
+      if (tadiPWMnaik) {
+        if (waktuJeda == 0) {
+          waktuJeda = 3;
+        } else if (waktuJeda == 1) {
+          tadiPWMnaik = false;
+          pwmMotor-=5;
+        }
+      } else {
+          tadiPWMnaik = false;
+          pwmMotor--;
+      }
+    }
+    else {
+      if(tadiPWMnaik) pwmMotor+=2; 
+      else pwmMotor-=5;
+    }
+  }
+  // Jika PWM naik nyalakan LED. Jika tidak, matikan.
+  digitalWrite(LED_BUILTIN, tadiPWMnaik);
+  // PROTEKSI KRUSIAL: Mencegah nilai PWM overflow (di bawah 0 atau di atas 255)
+  pwmMotor = constrain(pwmMotor, 0, 255);
+  analogWrite(PIN_MOTOR, pwmMotor);
+}
+
+// MODUL DISPLAY
+void updateDisplay() {
+  // Jeda agar diam di SP 3 siklus
+  if(waktuJeda > 0) waktuJeda--;
+
+  lcd.setCursor(0, 0);
+  if (currentMode == 1)      lcd.print("1. RPM Analytics    ");
+  else if (currentMode == 2) lcd.print("2. Basic Control    ");
+  else if (currentMode == 3) lcd.print("3. Histerisis Ctrl  ");
+
+  // Baris 2: RPM Tampilan Integer & Status Start/Stop
+  lcd.setCursor(0, 1);
+  lcd.print("PV->RPM : "); if (currentRPM<100) lcd.print(" "); if (currentRPM<10) lcd.print(" ");
+  lcd.print(currentRPM); 
+  lcd.print("  "); // Padding untuk menghapus sisa angka
+
+  // Menulis status ON/OFF di kolom 15 (index 14)
+  lcd.setCursor(14, 1);
+  if (motorAktif) {
+    lcd.print(" ON");
+  } else {
+    lcd.print("OFF");
+  }
+  // Menulis status PWM
+  lcd.print(pwmMotor); if (pwmMotor<100) lcd.print(" "); if (pwmMotor<10) lcd.print(" ");
+
+  // Baris 3 & 4: Parameter
+  if (currentMode >= 2) {
+    lcd.setCursor(0, 2);
+    lcd.print("SetPoint: "); if (setPoint<100) lcd.print(" "); if (setPoint<10) lcd.print(" ");
+    lcd.print(setPoint); lcd.print(" RPM   ");
+  }
+  if (currentMode == 3) {
+    lcd.setCursor(0, 3); 
+    lcd.print("DeadBand:"); lcd.print((char)0); if (deadBand<100) lcd.print(" "); if (deadBand<10) lcd.print(" ");
+    lcd.print(deadBand); lcd.print(" RPM   ");
+  }
+
+}

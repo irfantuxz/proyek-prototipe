@@ -1,0 +1,1716 @@
+
+C:\Users\TuxZ\AppData\Local\arduino\sketches\AB7625F2CAD79D240AB92B578BEB208C/ATtiny2313_Dual_Sensor_ina219.ino.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	14 c0       	rjmp	.+40     	; 0x2a <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+  26:	1a c0       	rjmp	.+52     	; 0x5c <__bad_interrupt>
+  28:	19 c0       	rjmp	.+50     	; 0x5c <__bad_interrupt>
+
+0000002a <__ctors_end>:
+__trampolines_start():
+  2a:	11 24       	eor	r1, r1
+  2c:	1f be       	out	0x3f, r1	; 63
+  2e:	cf ed       	ldi	r28, 0xDF	; 223
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+__do_copy_data():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2409
+  32:	10 e0       	ldi	r17, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2410
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2411
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2412
+  38:	ec ec       	ldi	r30, 0xCC	; 204
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2413
+  3a:	f6 e0       	ldi	r31, 0x06	; 6
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2414
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2417
+  3e:	05 90       	lpm	r0, Z+
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2422
+  40:	0d 92       	st	X+, r0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2424
+  42:	aa 39       	cpi	r26, 0x9A	; 154
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2425
+  44:	b1 07       	cpc	r27, r17
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2426
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_L__+0x1>
+
+00000048 <__do_clear_bss>:
+__do_clear_bss():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2441
+  48:	20 e0       	ldi	r18, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2442
+  4a:	aa e9       	ldi	r26, 0x9A	; 154
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2443
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2444
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2446
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
+  52:	ad 39       	cpi	r26, 0x9D	; 157
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2449
+  54:	b2 07       	cpc	r27, r18
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2450
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+.do_clear_bss_start():
+  58:	0d d3       	rcall	.+1562   	; 0x674 <main>
+  5a:	36 c3       	rjmp	.+1644   	; 0x6c8 <_exit>
+
+0000005c <__bad_interrupt>:
+__vector_1():
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <i2c_delay()>:
+	...
+_ZL9i2c_delayv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:40
+
+//====================== Fungsi I2C Bit-Banged ========================//
+
+static inline void i2c_delay() {
+  asm volatile ("nop\n nop\n nop\n nop\n nop\n nop\n nop\n nop\n");
+}
+  6e:	08 95       	ret
+
+00000070 <sda_hi()>:
+_ZL6sda_hiv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:42
+
+static inline void sda_hi() { DDRD &= ~_BV(SDA_PIN); PORTD |=  _BV(SDA_PIN); }
+  70:	8c 98       	cbi	0x11, 4	; 17
+  72:	94 9a       	sbi	0x12, 4	; 18
+  74:	08 95       	ret
+
+00000076 <sda_lo()>:
+_ZL6sda_lov():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:43
+static inline void sda_lo() { DDRD |=  _BV(SDA_PIN); PORTD &= ~_BV(SDA_PIN); }
+  76:	8c 9a       	sbi	0x11, 4	; 17
+  78:	94 98       	cbi	0x12, 4	; 18
+  7a:	08 95       	ret
+
+0000007c <scl_hi()>:
+_ZL6scl_hiv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:44
+static inline void scl_hi() { DDRD &= ~_BV(SCL_PIN); PORTD |=  _BV(SCL_PIN); }
+  7c:	8d 98       	cbi	0x11, 5	; 17
+  7e:	95 9a       	sbi	0x12, 5	; 18
+  80:	08 95       	ret
+
+00000082 <scl_lo()>:
+_ZL6scl_lov():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:45
+static inline void scl_lo() { DDRD |=  _BV(SCL_PIN); PORTD &= ~_BV(SCL_PIN); }
+  82:	8d 9a       	sbi	0x11, 5	; 17
+  84:	95 98       	cbi	0x12, 5	; 18
+  86:	08 95       	ret
+
+00000088 <i2c_start()>:
+_ZL9i2c_startv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:48
+
+static void i2c_start() {
+  sda_hi(); scl_hi(); i2c_delay();
+  88:	f3 df       	rcall	.-26     	; 0x70 <sda_hi()>
+  8a:	f8 df       	rcall	.-16     	; 0x7c <scl_hi()>
+  8c:	e8 df       	rcall	.-48     	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:49
+  sda_lo();           i2c_delay();
+  8e:	f3 df       	rcall	.-26     	; 0x76 <sda_lo()>
+  90:	e6 df       	rcall	.-52     	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:50
+  scl_lo();           i2c_delay();
+  92:	f7 df       	rcall	.-18     	; 0x82 <scl_lo()>
+  94:	e4 cf       	rjmp	.-56     	; 0x5e <i2c_delay()>
+
+00000096 <i2c_stop()>:
+_ZL8i2c_stopv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:54
+}
+
+static void i2c_stop() {
+  sda_lo(); i2c_delay();
+  96:	ef df       	rcall	.-34     	; 0x76 <sda_lo()>
+  98:	e2 df       	rcall	.-60     	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:55
+  scl_hi(); i2c_delay();
+  9a:	f0 df       	rcall	.-32     	; 0x7c <scl_hi()>
+  9c:	e0 df       	rcall	.-64     	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:56
+  sda_hi(); i2c_delay();
+  9e:	e8 df       	rcall	.-48     	; 0x70 <sda_hi()>
+  a0:	de cf       	rjmp	.-68     	; 0x5e <i2c_delay()>
+
+000000a2 <i2c_write(unsigned char)>:
+_Z9i2c_writeh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:59
+}
+
+bool i2c_write(uint8_t data) {
+  a2:	cf 93       	push	r28
+  a4:	df 93       	push	r29
+  a6:	d8 2f       	mov	r29, r24
+  a8:	c8 e0       	ldi	r28, 0x08	; 8
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:61
+  for (uint8_t i = 0; i < 8; i++) {
+    (data & 0x80) ? sda_hi() : sda_lo();
+  aa:	d7 ff       	sbrs	r29, 7
+  ac:	17 c0       	rjmp	.+46     	; 0xdc <i2c_write(unsigned char)+0x3a>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:61 (discriminator 1)
+  ae:	e0 df       	rcall	.-64     	; 0x70 <sda_hi()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:62 (discriminator 2)
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+  b0:	d6 df       	rcall	.-84     	; 0x5e <i2c_delay()>
+  b2:	e4 df       	rcall	.-56     	; 0x7c <scl_hi()>
+  b4:	d4 df       	rcall	.-88     	; 0x5e <i2c_delay()>
+  b6:	e5 df       	rcall	.-54     	; 0x82 <scl_lo()>
+  b8:	d2 df       	rcall	.-92     	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:63 (discriminator 2)
+    data <<= 1;
+  ba:	dd 0f       	add	r29, r29
+  bc:	c1 50       	subi	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:60 (discriminator 2)
+  scl_hi(); i2c_delay();
+  sda_hi(); i2c_delay();
+}
+
+bool i2c_write(uint8_t data) {
+  for (uint8_t i = 0; i < 8; i++) {
+  be:	a9 f7       	brne	.-22     	; 0xaa <i2c_write(unsigned char)+0x8>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:65
+    (data & 0x80) ? sda_hi() : sda_lo();
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+    data <<= 1;
+  }
+  sda_hi(); i2c_delay(); scl_hi(); i2c_delay();
+  c0:	d7 df       	rcall	.-82     	; 0x70 <sda_hi()>
+  c2:	cd df       	rcall	.-102    	; 0x5e <i2c_delay()>
+  c4:	db df       	rcall	.-74     	; 0x7c <scl_hi()>
+  c6:	cb df       	rcall	.-106    	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:66
+  bool ack = !(PIND & _BV(SDA_PIN));
+  c8:	c0 b3       	in	r28, 0x10	; 16
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:67
+  scl_lo(); i2c_delay();
+  ca:	db df       	rcall	.-74     	; 0x82 <scl_lo()>
+  cc:	c8 df       	rcall	.-112    	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:66
+    (data & 0x80) ? sda_hi() : sda_lo();
+    i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+    data <<= 1;
+  }
+  sda_hi(); i2c_delay(); scl_hi(); i2c_delay();
+  bool ack = !(PIND & _BV(SDA_PIN));
+  ce:	c2 95       	swap	r28
+  d0:	c1 70       	andi	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:69
+  scl_lo(); i2c_delay();
+  return ack;
+}
+  d2:	81 e0       	ldi	r24, 0x01	; 1
+  d4:	8c 27       	eor	r24, r28
+  d6:	df 91       	pop	r29
+  d8:	cf 91       	pop	r28
+  da:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:61 (discriminator 2)
+  sda_hi(); i2c_delay();
+}
+
+bool i2c_write(uint8_t data) {
+  for (uint8_t i = 0; i < 8; i++) {
+    (data & 0x80) ? sda_hi() : sda_lo();
+  dc:	cc df       	rcall	.-104    	; 0x76 <sda_lo()>
+  de:	e8 cf       	rjmp	.-48     	; 0xb0 <i2c_write(unsigned char)+0xe>
+
+000000e0 <i2c_read(bool)>:
+_Z8i2c_readb():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:71
+  bool ack = !(PIND & _BV(SDA_PIN));
+  scl_lo(); i2c_delay();
+  return ack;
+}
+
+uint8_t i2c_read(bool ack) {
+  e0:	1f 93       	push	r17
+  e2:	cf 93       	push	r28
+  e4:	df 93       	push	r29
+  e6:	18 2f       	mov	r17, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:73
+  uint8_t data = 0;
+  sda_hi();
+  e8:	c3 df       	rcall	.-122    	; 0x70 <sda_hi()>
+  ea:	d8 e0       	ldi	r29, 0x08	; 8
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:72
+  scl_lo(); i2c_delay();
+  return ack;
+}
+
+uint8_t i2c_read(bool ack) {
+  uint8_t data = 0;
+  ec:	c0 e0       	ldi	r28, 0x00	; 0
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:75
+  sda_hi();
+  for (uint8_t i = 0; i < 8; i++) {
+    data <<= 1;
+  ee:	cc 0f       	add	r28, r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:76
+    scl_hi(); i2c_delay();
+  f0:	c5 df       	rcall	.-118    	; 0x7c <scl_hi()>
+  f2:	b5 df       	rcall	.-150    	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:77
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+  f4:	84 99       	sbic	0x10, 4	; 16
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:77 (discriminator 1)
+  f6:	c1 60       	ori	r28, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:78 (discriminator 2)
+    scl_lo(); i2c_delay();
+  f8:	c4 df       	rcall	.-120    	; 0x82 <scl_lo()>
+  fa:	b1 df       	rcall	.-158    	; 0x5e <i2c_delay()>
+  fc:	d1 50       	subi	r29, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:74 (discriminator 2)
+}
+
+uint8_t i2c_read(bool ack) {
+  uint8_t data = 0;
+  sda_hi();
+  for (uint8_t i = 0; i < 8; i++) {
+  fe:	b9 f7       	brne	.-18     	; 0xee <i2c_read(bool)+0xe>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:80
+    data <<= 1;
+    scl_hi(); i2c_delay();
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+    scl_lo(); i2c_delay();
+  }
+  ack ? sda_lo() : sda_hi();
+ 100:	11 23       	and	r17, r17
+ 102:	61 f0       	breq	.+24     	; 0x11c <i2c_read(bool)+0x3c>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:80 (discriminator 1)
+ 104:	b8 df       	rcall	.-144    	; 0x76 <sda_lo()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:81
+  i2c_delay(); scl_hi(); i2c_delay(); scl_lo(); i2c_delay();
+ 106:	ab df       	rcall	.-170    	; 0x5e <i2c_delay()>
+ 108:	b9 df       	rcall	.-142    	; 0x7c <scl_hi()>
+ 10a:	a9 df       	rcall	.-174    	; 0x5e <i2c_delay()>
+ 10c:	ba df       	rcall	.-140    	; 0x82 <scl_lo()>
+ 10e:	a7 df       	rcall	.-178    	; 0x5e <i2c_delay()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:82
+  sda_hi();
+ 110:	af df       	rcall	.-162    	; 0x70 <sda_hi()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:84
+  return data;
+}
+ 112:	8c 2f       	mov	r24, r28
+ 114:	df 91       	pop	r29
+ 116:	cf 91       	pop	r28
+ 118:	1f 91       	pop	r17
+ 11a:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:80 (discriminator 2)
+    data <<= 1;
+    scl_hi(); i2c_delay();
+    if (PIND & _BV(SDA_PIN)) data |= 1;
+    scl_lo(); i2c_delay();
+  }
+  ack ? sda_lo() : sda_hi();
+ 11c:	a9 df       	rcall	.-174    	; 0x70 <sda_hi()>
+ 11e:	f3 cf       	rjmp	.-26     	; 0x106 <i2c_read(bool)+0x26>
+
+00000120 <lcd_expanderWrite(unsigned char)>:
+_Z17lcd_expanderWriteh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:88
+  return data;
+}
+
+//======================= Fungsi LCD I2C =======================//
+
+void lcd_expanderWrite(uint8_t data) {
+ 120:	cf 93       	push	r28
+ 122:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:89
+  i2c_start();
+ 124:	b1 df       	rcall	.-158    	; 0x88 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:90
+  i2c_write(LCD_ADDR << 1);
+ 126:	8e e4       	ldi	r24, 0x4E	; 78
+ 128:	bc df       	rcall	.-136    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:91
+  i2c_write(data | BACKLIGHT);
+ 12a:	8c 2f       	mov	r24, r28
+ 12c:	88 60       	ori	r24, 0x08	; 8
+ 12e:	b9 df       	rcall	.-142    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:93
+  i2c_stop();
+}
+ 130:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:92
+
+void lcd_expanderWrite(uint8_t data) {
+  i2c_start();
+  i2c_write(LCD_ADDR << 1);
+  i2c_write(data | BACKLIGHT);
+  i2c_stop();
+ 132:	b1 cf       	rjmp	.-158    	; 0x96 <i2c_stop()>
+
+00000134 <lcd_pulseEnable(unsigned char)>:
+_Z15lcd_pulseEnableh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:95
+}
+
+void lcd_pulseEnable(uint8_t data) {
+ 134:	cf 93       	push	r28
+ 136:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:96
+  lcd_expanderWrite(data | En);
+ 138:	84 60       	ori	r24, 0x04	; 4
+ 13a:	f2 df       	rcall	.-28     	; 0x120 <lcd_expanderWrite(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 13c:	84 e0       	ldi	r24, 0x04	; 4
+ 13e:	8a 95       	dec	r24
+ 140:	f1 f7       	brne	.-4      	; 0x13e <lcd_pulseEnable(unsigned char)+0xa>
+_Z15lcd_pulseEnableh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:98
+  _delay_us(1);
+  lcd_expanderWrite(data & ~En);
+ 142:	8c 2f       	mov	r24, r28
+ 144:	8b 7f       	andi	r24, 0xFB	; 251
+ 146:	ec df       	rcall	.-40     	; 0x120 <lcd_expanderWrite(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 148:	88 ec       	ldi	r24, 0xC8	; 200
+ 14a:	8a 95       	dec	r24
+ 14c:	f1 f7       	brne	.-4      	; 0x14a <lcd_pulseEnable(unsigned char)+0x16>
+_Z15lcd_pulseEnableh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:100
+  _delay_us(50);
+}
+ 14e:	cf 91       	pop	r28
+ 150:	08 95       	ret
+
+00000152 <lcd_write4bits(unsigned char)>:
+_Z14lcd_write4bitsh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:102
+
+void lcd_write4bits(uint8_t value) {
+ 152:	cf 93       	push	r28
+ 154:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:103
+  lcd_expanderWrite(value);
+ 156:	e4 df       	rcall	.-56     	; 0x120 <lcd_expanderWrite(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:104
+  lcd_pulseEnable(value);
+ 158:	8c 2f       	mov	r24, r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:105
+}
+ 15a:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:104
+  _delay_us(50);
+}
+
+void lcd_write4bits(uint8_t value) {
+  lcd_expanderWrite(value);
+  lcd_pulseEnable(value);
+ 15c:	eb cf       	rjmp	.-42     	; 0x134 <lcd_pulseEnable(unsigned char)>
+
+0000015e <lcd_send(unsigned char, unsigned char)>:
+_Z8lcd_sendhh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:107
+}
+
+void lcd_send(uint8_t value, uint8_t mode) {
+ 15e:	cf 93       	push	r28
+ 160:	df 93       	push	r29
+ 162:	c8 2f       	mov	r28, r24
+ 164:	d6 2f       	mov	r29, r22
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:108
+  uint8_t high = (value & 0xF0) | mode;
+ 166:	80 7f       	andi	r24, 0xF0	; 240
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:110
+  uint8_t low  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(high);
+ 168:	86 2b       	or	r24, r22
+ 16a:	f3 df       	rcall	.-26     	; 0x152 <lcd_write4bits(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:109
+  lcd_pulseEnable(value);
+}
+
+void lcd_send(uint8_t value, uint8_t mode) {
+  uint8_t high = (value & 0xF0) | mode;
+  uint8_t low  = ((value << 4) & 0xF0) | mode;
+ 16c:	8c 2f       	mov	r24, r28
+ 16e:	82 95       	swap	r24
+ 170:	80 7f       	andi	r24, 0xF0	; 240
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:111
+  lcd_write4bits(high);
+  lcd_write4bits(low);
+ 172:	8d 2b       	or	r24, r29
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:112
+}
+ 174:	df 91       	pop	r29
+ 176:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:111
+
+void lcd_send(uint8_t value, uint8_t mode) {
+  uint8_t high = (value & 0xF0) | mode;
+  uint8_t low  = ((value << 4) & 0xF0) | mode;
+  lcd_write4bits(high);
+  lcd_write4bits(low);
+ 178:	ec cf       	rjmp	.-40     	; 0x152 <lcd_write4bits(unsigned char)>
+
+0000017a <lcd_command(unsigned char)>:
+_Z11lcd_commandh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:115
+}
+
+void lcd_command(uint8_t cmd) {
+  lcd_send(cmd, 0);
+ 17a:	60 e0       	ldi	r22, 0x00	; 0
+ 17c:	f0 cf       	rjmp	.-32     	; 0x15e <lcd_send(unsigned char, unsigned char)>
+
+0000017e <lcd_init()>:
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:119
+}
+
+void lcd_init() {
+  lcd_expanderWrite(0);
+ 17e:	80 e0       	ldi	r24, 0x00	; 0
+ 180:	cf df       	rcall	.-98     	; 0x120 <lcd_expanderWrite(unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 182:	2f eb       	ldi	r18, 0xBF	; 191
+ 184:	84 ed       	ldi	r24, 0xD4	; 212
+ 186:	91 e0       	ldi	r25, 0x01	; 1
+ 188:	21 50       	subi	r18, 0x01	; 1
+ 18a:	80 40       	sbci	r24, 0x00	; 0
+ 18c:	90 40       	sbci	r25, 0x00	; 0
+ 18e:	e1 f7       	brne	.-8      	; 0x188 <lcd_init()+0xa>
+ 190:	00 c0       	rjmp	.+0      	; 0x192 <lcd_init()+0x14>
+ 192:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:121
+  _delay_ms(50);
+  lcd_write4bits(0x30); _delay_ms(5);
+ 194:	80 e3       	ldi	r24, 0x30	; 48
+ 196:	dd df       	rcall	.-70     	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 198:	87 e9       	ldi	r24, 0x97	; 151
+ 19a:	9a e3       	ldi	r25, 0x3A	; 58
+ 19c:	01 97       	sbiw	r24, 0x01	; 1
+ 19e:	f1 f7       	brne	.-4      	; 0x19c <lcd_init()+0x1e>
+ 1a0:	00 c0       	rjmp	.+0      	; 0x1a2 <lcd_init()+0x24>
+ 1a2:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:122
+  lcd_write4bits(0x30); _delay_us(150);
+ 1a4:	80 e3       	ldi	r24, 0x30	; 48
+ 1a6:	d5 df       	rcall	.-86     	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1a8:	81 ec       	ldi	r24, 0xC1	; 193
+ 1aa:	91 e0       	ldi	r25, 0x01	; 1
+ 1ac:	01 97       	sbiw	r24, 0x01	; 1
+ 1ae:	f1 f7       	brne	.-4      	; 0x1ac <lcd_init()+0x2e>
+ 1b0:	00 c0       	rjmp	.+0      	; 0x1b2 <lcd_init()+0x34>
+ 1b2:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:123
+  lcd_write4bits(0x30); _delay_us(150);
+ 1b4:	80 e3       	ldi	r24, 0x30	; 48
+ 1b6:	cd df       	rcall	.-102    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 1b8:	81 ec       	ldi	r24, 0xC1	; 193
+ 1ba:	91 e0       	ldi	r25, 0x01	; 1
+ 1bc:	01 97       	sbiw	r24, 0x01	; 1
+ 1be:	f1 f7       	brne	.-4      	; 0x1bc <lcd_init()+0x3e>
+ 1c0:	00 c0       	rjmp	.+0      	; 0x1c2 <lcd_init()+0x44>
+ 1c2:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:124
+  lcd_write4bits(0x20); _delay_us(150);
+ 1c4:	80 e2       	ldi	r24, 0x20	; 32
+ 1c6:	c5 df       	rcall	.-118    	; 0x152 <lcd_write4bits(unsigned char)>
+_delay_us():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:276
+ 1c8:	81 ec       	ldi	r24, 0xC1	; 193
+ 1ca:	91 e0       	ldi	r25, 0x01	; 1
+ 1cc:	01 97       	sbiw	r24, 0x01	; 1
+ 1ce:	f1 f7       	brne	.-4      	; 0x1cc <lcd_init()+0x4e>
+ 1d0:	00 c0       	rjmp	.+0      	; 0x1d2 <lcd_init()+0x54>
+ 1d2:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:126
+
+  lcd_command(LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS);
+ 1d4:	88 e2       	ldi	r24, 0x28	; 40
+ 1d6:	d1 df       	rcall	.-94     	; 0x17a <lcd_command(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:127
+  lcd_command(LCD_DISPLAYCONTROL | LCD_DISPLAYON);
+ 1d8:	8c e0       	ldi	r24, 0x0C	; 12
+ 1da:	cf df       	rcall	.-98     	; 0x17a <lcd_command(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:128
+  lcd_command(LCD_CLEARDISPLAY); _delay_ms(2);
+ 1dc:	81 e0       	ldi	r24, 0x01	; 1
+ 1de:	cd df       	rcall	.-102    	; 0x17a <lcd_command(unsigned char)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 1e0:	8f e6       	ldi	r24, 0x6F	; 111
+ 1e2:	97 e1       	ldi	r25, 0x17	; 23
+ 1e4:	01 97       	sbiw	r24, 0x01	; 1
+ 1e6:	f1 f7       	brne	.-4      	; 0x1e4 <lcd_init()+0x66>
+ 1e8:	00 c0       	rjmp	.+0      	; 0x1ea <lcd_init()+0x6c>
+ 1ea:	00 00       	nop
+_Z8lcd_initv():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:129
+  lcd_command(LCD_ENTRYMODESET | LCD_ENTRYLEFT);
+ 1ec:	86 e0       	ldi	r24, 0x06	; 6
+ 1ee:	c5 cf       	rjmp	.-118    	; 0x17a <lcd_command(unsigned char)>
+
+000001f0 <lcd_setcursor(unsigned char, unsigned char)>:
+_Z13lcd_setcursorhh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:132
+}
+
+void lcd_setcursor(uint8_t row, uint8_t col) {
+ 1f0:	cf 93       	push	r28
+ 1f2:	df 93       	push	r29
+ 1f4:	00 d0       	rcall	.+0      	; 0x1f6 <lcd_setcursor(unsigned char, unsigned char)+0x6>
+ 1f6:	cd b7       	in	r28, 0x3d	; 61
+ 1f8:	dd 27       	eor	r29, r29
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:133
+  const uint8_t offsets[] = {0x00, 0x40};
+ 1fa:	19 82       	std	Y+1, r1	; 0x01
+ 1fc:	90 e4       	ldi	r25, 0x40	; 64
+ 1fe:	9a 83       	std	Y+2, r25	; 0x02
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:135
+  if (row > 1) row = 1;
+  lcd_command(LCD_SETDDRAMADDR | (col + offsets[row]));
+ 200:	81 11       	cpse	r24, r1
+ 202:	81 e0       	ldi	r24, 0x01	; 1
+ 204:	fe 01       	movw	r30, r28
+ 206:	e8 0f       	add	r30, r24
+ 208:	f1 1d       	adc	r31, r1
+ 20a:	81 81       	ldd	r24, Z+1	; 0x01
+ 20c:	86 0f       	add	r24, r22
+ 20e:	80 68       	ori	r24, 0x80	; 128
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:136
+}
+ 210:	ce 5f       	subi	r28, 0xFE	; 254
+ 212:	cd bf       	out	0x3d, r28	; 61
+ 214:	df 91       	pop	r29
+ 216:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:135
+}
+
+void lcd_setcursor(uint8_t row, uint8_t col) {
+  const uint8_t offsets[] = {0x00, 0x40};
+  if (row > 1) row = 1;
+  lcd_command(LCD_SETDDRAMADDR | (col + offsets[row]));
+ 218:	b0 cf       	rjmp	.-160    	; 0x17a <lcd_command(unsigned char)>
+
+0000021a <lcd_print(char const*)>:
+_Z9lcd_printPKc():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:138
+}
+
+void lcd_print(const char *str) {
+ 21a:	cf 93       	push	r28
+ 21c:	df 93       	push	r29
+ 21e:	ec 01       	movw	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:139 (discriminator 2)
+  while (*str) lcd_send(*str++, Rs);
+ 220:	89 91       	ld	r24, Y+
+ 222:	88 23       	and	r24, r24
+ 224:	19 f0       	breq	.+6      	; 0x22c <lcd_print(char const*)+0x12>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:139 (discriminator 1)
+ 226:	61 e0       	ldi	r22, 0x01	; 1
+ 228:	9a df       	rcall	.-204    	; 0x15e <lcd_send(unsigned char, unsigned char)>
+ 22a:	fa cf       	rjmp	.-12     	; 0x220 <lcd_print(char const*)+0x6>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:140
+}
+ 22c:	df 91       	pop	r29
+ 22e:	cf 91       	pop	r28
+ 230:	08 95       	ret
+
+00000232 <ina219_write(unsigned char, unsigned int, unsigned char)>:
+_Z12ina219_writehjh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:144
+
+//======================= Fungsi INA219 =======================//
+
+void ina219_write(uint8_t reg, uint16_t val, uint8_t addr) {
+ 232:	0f 93       	push	r16
+ 234:	1f 93       	push	r17
+ 236:	cf 93       	push	r28
+ 238:	df 93       	push	r29
+ 23a:	18 2f       	mov	r17, r24
+ 23c:	eb 01       	movw	r28, r22
+ 23e:	04 2f       	mov	r16, r20
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:145
+  i2c_start();
+ 240:	23 df       	rcall	.-442    	; 0x88 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:146
+  i2c_write(addr << 1);
+ 242:	80 2f       	mov	r24, r16
+ 244:	88 0f       	add	r24, r24
+ 246:	2d df       	rcall	.-422    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:147
+  i2c_write(reg);
+ 248:	81 2f       	mov	r24, r17
+ 24a:	2b df       	rcall	.-426    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:148
+  i2c_write(val >> 8);
+ 24c:	8d 2f       	mov	r24, r29
+ 24e:	29 df       	rcall	.-430    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:149
+  i2c_write(val & 0xFF);
+ 250:	8c 2f       	mov	r24, r28
+ 252:	27 df       	rcall	.-434    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:151
+  i2c_stop();
+}
+ 254:	df 91       	pop	r29
+ 256:	cf 91       	pop	r28
+ 258:	1f 91       	pop	r17
+ 25a:	0f 91       	pop	r16
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:150
+  i2c_start();
+  i2c_write(addr << 1);
+  i2c_write(reg);
+  i2c_write(val >> 8);
+  i2c_write(val & 0xFF);
+  i2c_stop();
+ 25c:	1c cf       	rjmp	.-456    	; 0x96 <i2c_stop()>
+
+0000025e <ina219_read(unsigned char, unsigned char)>:
+_Z11ina219_readhh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:153
+}
+
+uint16_t ina219_read(uint8_t reg, uint8_t addr) {
+ 25e:	cf 93       	push	r28
+ 260:	df 93       	push	r29
+ 262:	d8 2f       	mov	r29, r24
+ 264:	c6 2f       	mov	r28, r22
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:155
+  uint8_t hb, lb;
+  i2c_start(); i2c_write(addr << 1); i2c_write(reg); i2c_stop();
+ 266:	10 df       	rcall	.-480    	; 0x88 <i2c_start()>
+ 268:	8c 2f       	mov	r24, r28
+ 26a:	88 0f       	add	r24, r24
+ 26c:	1a df       	rcall	.-460    	; 0xa2 <i2c_write(unsigned char)>
+ 26e:	8d 2f       	mov	r24, r29
+ 270:	18 df       	rcall	.-464    	; 0xa2 <i2c_write(unsigned char)>
+ 272:	11 df       	rcall	.-478    	; 0x96 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:156
+  i2c_start(); i2c_write((addr << 1) | 1);
+ 274:	09 df       	rcall	.-494    	; 0x88 <i2c_start()>
+ 276:	8c 2f       	mov	r24, r28
+ 278:	88 0f       	add	r24, r24
+ 27a:	81 60       	ori	r24, 0x01	; 1
+ 27c:	12 df       	rcall	.-476    	; 0xa2 <i2c_write(unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:157
+  hb = i2c_read(true);
+ 27e:	81 e0       	ldi	r24, 0x01	; 1
+ 280:	2f df       	rcall	.-418    	; 0xe0 <i2c_read(bool)>
+ 282:	d8 2f       	mov	r29, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:158
+  lb = i2c_read(false);
+ 284:	80 e0       	ldi	r24, 0x00	; 0
+ 286:	2c df       	rcall	.-424    	; 0xe0 <i2c_read(bool)>
+ 288:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:159
+  i2c_stop();
+ 28a:	05 df       	rcall	.-502    	; 0x96 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:161
+  return (hb << 8) | lb;
+}
+ 28c:	ce 01       	movw	r24, r28
+ 28e:	df 91       	pop	r29
+ 290:	cf 91       	pop	r28
+ 292:	08 95       	ret
+
+00000294 <ina219_get_uA(unsigned char)>:
+_Z13ina219_get_uAh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:164
+
+int16_t ina219_get_uA(uint8_t addr) {
+  return (int16_t)ina219_read(0x04, addr);   // Read current register (0x04)
+ 294:	68 2f       	mov	r22, r24
+ 296:	84 e0       	ldi	r24, 0x04	; 4
+ 298:	e2 cf       	rjmp	.-60     	; 0x25e <ina219_read(unsigned char, unsigned char)>
+
+0000029a <ina219_get_mV(unsigned char)>:
+_Z13ina219_get_mVh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:168
+}
+
+uint16_t ina219_get_mV(uint8_t addr) {
+  return (ina219_read(0x02, addr) >> 3) * 4; // Read Bus voltage (0x02), 4 mV per bit
+ 29a:	68 2f       	mov	r22, r24
+ 29c:	82 e0       	ldi	r24, 0x02	; 2
+ 29e:	df df       	rcall	.-66     	; 0x25e <ina219_read(unsigned char, unsigned char)>
+ 2a0:	23 e0       	ldi	r18, 0x03	; 3
+ 2a2:	96 95       	lsr	r25
+ 2a4:	87 95       	ror	r24
+ 2a6:	2a 95       	dec	r18
+ 2a8:	e1 f7       	brne	.-8      	; 0x2a2 <ina219_get_mV(unsigned char)+0x8>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:169
+}
+ 2aa:	88 0f       	add	r24, r24
+ 2ac:	99 1f       	adc	r25, r25
+ 2ae:	88 0f       	add	r24, r24
+ 2b0:	99 1f       	adc	r25, r25
+ 2b2:	08 95       	ret
+
+000002b4 <ina219_init(unsigned char)>:
+_Z11ina219_inith():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:171
+
+void ina219_init(uint8_t addr) {
+ 2b4:	cf 93       	push	r28
+ 2b6:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:172
+  ina219_write(0x05, 0x1000, addr);   // Calibration register 100 µA per bit
+ 2b8:	48 2f       	mov	r20, r24
+ 2ba:	60 e0       	ldi	r22, 0x00	; 0
+ 2bc:	70 e1       	ldi	r23, 0x10	; 16
+ 2be:	85 e0       	ldi	r24, 0x05	; 5
+ 2c0:	b8 df       	rcall	.-144    	; 0x232 <ina219_write(unsigned char, unsigned int, unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:173
+  ina219_write(0x00, 0x01DF, addr);   // Config: 32V range, ±320mV shunt, 12-bit
+ 2c2:	4c 2f       	mov	r20, r28
+ 2c4:	6f ed       	ldi	r22, 0xDF	; 223
+ 2c6:	71 e0       	ldi	r23, 0x01	; 1
+ 2c8:	80 e0       	ldi	r24, 0x00	; 0
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:174
+}
+ 2ca:	cf 91       	pop	r28
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:173
+  return (ina219_read(0x02, addr) >> 3) * 4; // Read Bus voltage (0x02), 4 mV per bit
+}
+
+void ina219_init(uint8_t addr) {
+  ina219_write(0x05, 0x1000, addr);   // Calibration register 100 µA per bit
+  ina219_write(0x00, 0x01DF, addr);   // Config: 32V range, ±320mV shunt, 12-bit
+ 2cc:	b2 cf       	rjmp	.-156    	; 0x232 <ina219_write(unsigned char, unsigned int, unsigned char)>
+
+000002ce <scan_address(unsigned char)>:
+_Z12scan_addressh():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:182
+
+bool LCDinit  = 0;
+bool INA1init = 0;
+bool INA2init = 0;
+
+bool scan_address(uint8_t addr7) {
+ 2ce:	cf 93       	push	r28
+ 2d0:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:183
+  i2c_start();
+ 2d2:	da de       	rcall	.-588    	; 0x88 <i2c_start()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:184
+  bool ack = i2c_write(addr7 << 1);
+ 2d4:	8c 2f       	mov	r24, r28
+ 2d6:	88 0f       	add	r24, r24
+ 2d8:	e4 de       	rcall	.-568    	; 0xa2 <i2c_write(unsigned char)>
+ 2da:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:185
+  i2c_stop();
+ 2dc:	dc de       	rcall	.-584    	; 0x96 <i2c_stop()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:187
+  return ack;
+}
+ 2de:	8c 2f       	mov	r24, r28
+ 2e0:	cf 91       	pop	r28
+ 2e2:	08 95       	ret
+
+000002e4 <print_voltage(unsigned char, unsigned char, unsigned int)>:
+_Z13print_voltagehhj():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:189
+
+void print_voltage(uint8_t row, uint8_t col, uint16_t mV) {
+ 2e4:	0f 93       	push	r16
+ 2e6:	1f 93       	push	r17
+ 2e8:	cf 93       	push	r28
+ 2ea:	df 93       	push	r29
+ 2ec:	cd b7       	in	r28, 0x3d	; 61
+ 2ee:	dd 27       	eor	r29, r29
+ 2f0:	c8 50       	subi	r28, 0x08	; 8
+ 2f2:	cd bf       	out	0x3d, r28	; 61
+ 2f4:	18 2f       	mov	r17, r24
+ 2f6:	06 2f       	mov	r16, r22
+ 2f8:	9a 01       	movw	r18, r20
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:191
+  char buf[8];
+  buf[0] = (mV >= 10000) ? (mV / 10000 % 10 + '0') : ' ';
+ 2fa:	60 e2       	ldi	r22, 0x20	; 32
+ 2fc:	40 31       	cpi	r20, 0x10	; 16
+ 2fe:	87 e2       	ldi	r24, 0x27	; 39
+ 300:	58 07       	cpc	r21, r24
+ 302:	28 f0       	brcs	.+10     	; 0x30e <print_voltage(unsigned char, unsigned char, unsigned int)+0x2a>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:191 (discriminator 1)
+ 304:	ca 01       	movw	r24, r20
+ 306:	60 e1       	ldi	r22, 0x10	; 16
+ 308:	77 e2       	ldi	r23, 0x27	; 39
+ 30a:	b7 d1       	rcall	.+878    	; 0x67a <__udivmodhi4>
+ 30c:	60 5d       	subi	r22, 0xD0	; 208
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:191 (discriminator 4)
+ 30e:	69 83       	std	Y+1, r22	; 0x01
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:192 (discriminator 4)
+  buf[1] = (mV / 1000 % 10) + '0';
+ 310:	c9 01       	movw	r24, r18
+ 312:	68 ee       	ldi	r22, 0xE8	; 232
+ 314:	73 e0       	ldi	r23, 0x03	; 3
+ 316:	b1 d1       	rcall	.+866    	; 0x67a <__udivmodhi4>
+ 318:	cb 01       	movw	r24, r22
+ 31a:	ea e0       	ldi	r30, 0x0A	; 10
+ 31c:	f0 e0       	ldi	r31, 0x00	; 0
+ 31e:	bf 01       	movw	r22, r30
+ 320:	ac d1       	rcall	.+856    	; 0x67a <__udivmodhi4>
+ 322:	80 5d       	subi	r24, 0xD0	; 208
+ 324:	8a 83       	std	Y+2, r24	; 0x02
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:193 (discriminator 4)
+  buf[2] = '.';
+ 326:	8e e2       	ldi	r24, 0x2E	; 46
+ 328:	8b 83       	std	Y+3, r24	; 0x03
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:194 (discriminator 4)
+  buf[3] = (mV / 100 % 10) + '0';
+ 32a:	c9 01       	movw	r24, r18
+ 32c:	64 e6       	ldi	r22, 0x64	; 100
+ 32e:	70 e0       	ldi	r23, 0x00	; 0
+ 330:	a4 d1       	rcall	.+840    	; 0x67a <__udivmodhi4>
+ 332:	cb 01       	movw	r24, r22
+ 334:	bf 01       	movw	r22, r30
+ 336:	a1 d1       	rcall	.+834    	; 0x67a <__udivmodhi4>
+ 338:	80 5d       	subi	r24, 0xD0	; 208
+ 33a:	8c 83       	std	Y+4, r24	; 0x04
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:195 (discriminator 4)
+  buf[4] = (mV / 10 % 10) + '0';
+ 33c:	c9 01       	movw	r24, r18
+ 33e:	bf 01       	movw	r22, r30
+ 340:	9c d1       	rcall	.+824    	; 0x67a <__udivmodhi4>
+ 342:	cb 01       	movw	r24, r22
+ 344:	bf 01       	movw	r22, r30
+ 346:	99 d1       	rcall	.+818    	; 0x67a <__udivmodhi4>
+ 348:	80 5d       	subi	r24, 0xD0	; 208
+ 34a:	8d 83       	std	Y+5, r24	; 0x05
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:196 (discriminator 4)
+  buf[5] = ' ';
+ 34c:	80 e2       	ldi	r24, 0x20	; 32
+ 34e:	8e 83       	std	Y+6, r24	; 0x06
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:197 (discriminator 4)
+  buf[6] = 'V';
+ 350:	86 e5       	ldi	r24, 0x56	; 86
+ 352:	8f 83       	std	Y+7, r24	; 0x07
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:198 (discriminator 4)
+  buf[7] = '\0';
+ 354:	18 86       	std	Y+8, r1	; 0x08
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:199 (discriminator 4)
+  lcd_setcursor(row, col);
+ 356:	60 2f       	mov	r22, r16
+ 358:	81 2f       	mov	r24, r17
+ 35a:	4a df       	rcall	.-364    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:200 (discriminator 4)
+  lcd_print(buf);
+ 35c:	ce 01       	movw	r24, r28
+ 35e:	01 96       	adiw	r24, 0x01	; 1
+ 360:	5c df       	rcall	.-328    	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:201 (discriminator 4)
+}
+ 362:	c8 5f       	subi	r28, 0xF8	; 248
+ 364:	cd bf       	out	0x3d, r28	; 61
+ 366:	df 91       	pop	r29
+ 368:	cf 91       	pop	r28
+ 36a:	1f 91       	pop	r17
+ 36c:	0f 91       	pop	r16
+ 36e:	08 95       	ret
+
+00000370 <print_current(unsigned char, unsigned char, int)>:
+_Z13print_currenthhi():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:203
+
+void print_current(uint8_t row, uint8_t col, int16_t uA) {
+ 370:	af 92       	push	r10
+ 372:	bf 92       	push	r11
+ 374:	cf 92       	push	r12
+ 376:	df 92       	push	r13
+ 378:	ff 92       	push	r15
+ 37a:	0f 93       	push	r16
+ 37c:	1f 93       	push	r17
+ 37e:	cf 93       	push	r28
+ 380:	df 93       	push	r29
+ 382:	cd b7       	in	r28, 0x3d	; 61
+ 384:	dd 27       	eor	r29, r29
+ 386:	c9 50       	subi	r28, 0x09	; 9
+ 388:	cd bf       	out	0x3d, r28	; 61
+ 38a:	f8 2e       	mov	r15, r24
+ 38c:	36 2f       	mov	r19, r22
+ 38e:	8a 01       	movw	r16, r20
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:207
+  char buf[9];
+  uint8_t idx = 0;
+  // Handle arus negatif
+  if (uA < 0) {
+ 390:	57 ff       	sbrs	r21, 7
+ 392:	4a c0       	rjmp	.+148    	; 0x428 <__LOCK_REGION_LENGTH__+0x28>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:208
+    buf[idx++] = '-';
+ 394:	8d e2       	ldi	r24, 0x2D	; 45
+ 396:	89 83       	std	Y+1, r24	; 0x01
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:209
+    if (col > 0){if ((uA <= -1000)&&(uA>-10000)) col--;}
+ 398:	66 23       	and	r22, r22
+ 39a:	39 f0       	breq	.+14     	; 0x3aa <print_current(unsigned char, unsigned char, int)+0x3a>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:209 (discriminator 1)
+ 39c:	ca 01       	movw	r24, r20
+ 39e:	81 5f       	subi	r24, 0xF1	; 241
+ 3a0:	98 4d       	sbci	r25, 0xD8	; 216
+ 3a2:	88 32       	cpi	r24, 0x28	; 40
+ 3a4:	93 42       	sbci	r25, 0x23	; 35
+ 3a6:	08 f4       	brcc	.+2      	; 0x3aa <print_current(unsigned char, unsigned char, int)+0x3a>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:209 (discriminator 2)
+ 3a8:	31 50       	subi	r19, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:210
+    uA = -uA;
+ 3aa:	11 95       	neg	r17
+ 3ac:	01 95       	neg	r16
+ 3ae:	11 09       	sbc	r17, r1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:208
+void print_current(uint8_t row, uint8_t col, int16_t uA) {
+  char buf[9];
+  uint8_t idx = 0;
+  // Handle arus negatif
+  if (uA < 0) {
+    buf[idx++] = '-';
+ 3b0:	e1 e0       	ldi	r30, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:213
+    if (col > 0){if ((uA <= -1000)&&(uA>-10000)) col--;}
+    uA = -uA;
+  } else if (uA < 100) buf[idx++] = ' ';
+  // Print Value
+  if (uA >= 10000) buf[idx++] = (uA / 10000) % 10 + '0';
+ 3b2:	00 31       	cpi	r16, 0x10	; 16
+ 3b4:	87 e2       	ldi	r24, 0x27	; 39
+ 3b6:	18 07       	cpc	r17, r24
+ 3b8:	0c f4       	brge	.+2      	; 0x3bc <print_current(unsigned char, unsigned char, int)+0x4c>
+ 3ba:	a6 c0       	rjmp	.+332    	; 0x508 <__LOCK_REGION_LENGTH__+0x108>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:213 (discriminator 1)
+ 3bc:	cc 24       	eor	r12, r12
+ 3be:	c3 94       	inc	r12
+ 3c0:	d1 2c       	mov	r13, r1
+ 3c2:	cc 0e       	add	r12, r28
+ 3c4:	dd 1e       	adc	r13, r29
+ 3c6:	ce 0e       	add	r12, r30
+ 3c8:	d1 1c       	adc	r13, r1
+ 3ca:	c8 01       	movw	r24, r16
+ 3cc:	60 e1       	ldi	r22, 0x10	; 16
+ 3ce:	77 e2       	ldi	r23, 0x27	; 39
+ 3d0:	68 d1       	rcall	.+720    	; 0x6a2 <__divmodhi4>
+ 3d2:	60 5d       	subi	r22, 0xD0	; 208
+ 3d4:	d6 01       	movw	r26, r12
+ 3d6:	6c 93       	st	X, r22
+ 3d8:	ef 5f       	subi	r30, 0xFF	; 255
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:214 (discriminator 1)
+  if (uA >= 1000)  buf[idx++] = (uA / 1000) % 10 + '0';
+ 3da:	cc 24       	eor	r12, r12
+ 3dc:	c3 94       	inc	r12
+ 3de:	d1 2c       	mov	r13, r1
+ 3e0:	cc 0e       	add	r12, r28
+ 3e2:	dd 1e       	adc	r13, r29
+ 3e4:	ce 0e       	add	r12, r30
+ 3e6:	d1 1c       	adc	r13, r1
+ 3e8:	c8 01       	movw	r24, r16
+ 3ea:	68 ee       	ldi	r22, 0xE8	; 232
+ 3ec:	73 e0       	ldi	r23, 0x03	; 3
+ 3ee:	59 d1       	rcall	.+690    	; 0x6a2 <__divmodhi4>
+ 3f0:	cb 01       	movw	r24, r22
+ 3f2:	6a e0       	ldi	r22, 0x0A	; 10
+ 3f4:	70 e0       	ldi	r23, 0x00	; 0
+ 3f6:	55 d1       	rcall	.+682    	; 0x6a2 <__divmodhi4>
+ 3f8:	80 5d       	subi	r24, 0xD0	; 208
+ 3fa:	d6 01       	movw	r26, r12
+ 3fc:	8c 93       	st	X, r24
+ 3fe:	ef 5f       	subi	r30, 0xFF	; 255
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:215 (discriminator 1)
+  if (uA >= 100)   buf[idx++] = (uA / 100) % 10 + '0';
+ 400:	cc 24       	eor	r12, r12
+ 402:	c3 94       	inc	r12
+ 404:	d1 2c       	mov	r13, r1
+ 406:	cc 0e       	add	r12, r28
+ 408:	dd 1e       	adc	r13, r29
+ 40a:	ce 0e       	add	r12, r30
+ 40c:	d1 1c       	adc	r13, r1
+ 40e:	c8 01       	movw	r24, r16
+ 410:	64 e6       	ldi	r22, 0x64	; 100
+ 412:	70 e0       	ldi	r23, 0x00	; 0
+ 414:	46 d1       	rcall	.+652    	; 0x6a2 <__divmodhi4>
+ 416:	cb 01       	movw	r24, r22
+ 418:	6a e0       	ldi	r22, 0x0A	; 10
+ 41a:	70 e0       	ldi	r23, 0x00	; 0
+ 41c:	42 d1       	rcall	.+644    	; 0x6a2 <__divmodhi4>
+ 41e:	80 5d       	subi	r24, 0xD0	; 208
+ 420:	d6 01       	movw	r26, r12
+ 422:	8c 93       	st	X, r24
+ 424:	ef 5f       	subi	r30, 0xFF	; 255
+ 426:	07 c0       	rjmp	.+14     	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:211
+  // Handle arus negatif
+  if (uA < 0) {
+    buf[idx++] = '-';
+    if (col > 0){if ((uA <= -1000)&&(uA>-10000)) col--;}
+    uA = -uA;
+  } else if (uA < 100) buf[idx++] = ' ';
+ 428:	44 36       	cpi	r20, 0x64	; 100
+ 42a:	51 05       	cpc	r21, r1
+ 42c:	0c f0       	brlt	.+2      	; 0x430 <__LOCK_REGION_LENGTH__+0x30>
+ 42e:	6a c0       	rjmp	.+212    	; 0x504 <__LOCK_REGION_LENGTH__+0x104>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:211 (discriminator 1)
+ 430:	80 e2       	ldi	r24, 0x20	; 32
+ 432:	89 83       	std	Y+1, r24	; 0x01
+ 434:	e1 e0       	ldi	r30, 0x01	; 1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:216
+  // Print Value
+  if (uA >= 10000) buf[idx++] = (uA / 10000) % 10 + '0';
+  if (uA >= 1000)  buf[idx++] = (uA / 1000) % 10 + '0';
+  if (uA >= 100)   buf[idx++] = (uA / 100) % 10 + '0';
+  buf[idx++] = (uA / 10) % 10 + '0';
+ 436:	21 e0       	ldi	r18, 0x01	; 1
+ 438:	2e 0f       	add	r18, r30
+ 43a:	cc 24       	eor	r12, r12
+ 43c:	c3 94       	inc	r12
+ 43e:	d1 2c       	mov	r13, r1
+ 440:	cc 0e       	add	r12, r28
+ 442:	dd 1e       	adc	r13, r29
+ 444:	ce 0e       	add	r12, r30
+ 446:	d1 1c       	adc	r13, r1
+ 448:	9a e0       	ldi	r25, 0x0A	; 10
+ 44a:	a9 2e       	mov	r10, r25
+ 44c:	b1 2c       	mov	r11, r1
+ 44e:	c8 01       	movw	r24, r16
+ 450:	b5 01       	movw	r22, r10
+ 452:	27 d1       	rcall	.+590    	; 0x6a2 <__divmodhi4>
+ 454:	48 2f       	mov	r20, r24
+ 456:	cb 01       	movw	r24, r22
+ 458:	b5 01       	movw	r22, r10
+ 45a:	23 d1       	rcall	.+582    	; 0x6a2 <__divmodhi4>
+ 45c:	80 5d       	subi	r24, 0xD0	; 208
+ 45e:	d6 01       	movw	r26, r12
+ 460:	8c 93       	st	X, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:217
+  if (uA < 10000) {
+ 462:	00 31       	cpi	r16, 0x10	; 16
+ 464:	17 42       	sbci	r17, 0x27	; 39
+ 466:	a4 f4       	brge	.+40     	; 0x490 <__LOCK_REGION_LENGTH__+0x90>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:218
+    buf[idx++] = '.';
+ 468:	a1 e0       	ldi	r26, 0x01	; 1
+ 46a:	b0 e0       	ldi	r27, 0x00	; 0
+ 46c:	ac 0f       	add	r26, r28
+ 46e:	bd 1f       	adc	r27, r29
+ 470:	a2 0f       	add	r26, r18
+ 472:	b1 1d       	adc	r27, r1
+ 474:	8e e2       	ldi	r24, 0x2E	; 46
+ 476:	8c 93       	st	X, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:219
+    buf[idx++] = uA % 10 + '0';
+ 478:	23 e0       	ldi	r18, 0x03	; 3
+ 47a:	2e 0f       	add	r18, r30
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:218
+  if (uA >= 10000) buf[idx++] = (uA / 10000) % 10 + '0';
+  if (uA >= 1000)  buf[idx++] = (uA / 1000) % 10 + '0';
+  if (uA >= 100)   buf[idx++] = (uA / 100) % 10 + '0';
+  buf[idx++] = (uA / 10) % 10 + '0';
+  if (uA < 10000) {
+    buf[idx++] = '.';
+ 47c:	ee 5f       	subi	r30, 0xFE	; 254
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:219
+    buf[idx++] = uA % 10 + '0';
+ 47e:	81 e0       	ldi	r24, 0x01	; 1
+ 480:	90 e0       	ldi	r25, 0x00	; 0
+ 482:	8c 0f       	add	r24, r28
+ 484:	9d 1f       	adc	r25, r29
+ 486:	8e 0f       	add	r24, r30
+ 488:	91 1d       	adc	r25, r1
+ 48a:	fc 01       	movw	r30, r24
+ 48c:	40 5d       	subi	r20, 0xD0	; 208
+ 48e:	40 83       	st	Z, r20
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:221
+  }
+	if(idx < 5) buf[idx++] = ' ';
+ 490:	25 30       	cpi	r18, 0x05	; 5
+ 492:	48 f4       	brcc	.+18     	; 0x4a6 <__LOCK_REGION_LENGTH__+0xa6>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:221 (discriminator 1)
+ 494:	e1 e0       	ldi	r30, 0x01	; 1
+ 496:	f0 e0       	ldi	r31, 0x00	; 0
+ 498:	ec 0f       	add	r30, r28
+ 49a:	fd 1f       	adc	r31, r29
+ 49c:	e2 0f       	add	r30, r18
+ 49e:	f1 1d       	adc	r31, r1
+ 4a0:	80 e2       	ldi	r24, 0x20	; 32
+ 4a2:	80 83       	st	Z, r24
+ 4a4:	2f 5f       	subi	r18, 0xFF	; 255
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:222
+  buf[idx++] = 'm';
+ 4a6:	e1 e0       	ldi	r30, 0x01	; 1
+ 4a8:	f0 e0       	ldi	r31, 0x00	; 0
+ 4aa:	ec 0f       	add	r30, r28
+ 4ac:	fd 1f       	adc	r31, r29
+ 4ae:	e2 0f       	add	r30, r18
+ 4b0:	f1 1d       	adc	r31, r1
+ 4b2:	8d e6       	ldi	r24, 0x6D	; 109
+ 4b4:	80 83       	st	Z, r24
+ 4b6:	e1 e0       	ldi	r30, 0x01	; 1
+ 4b8:	e2 0f       	add	r30, r18
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:223
+  buf[idx++] = 'A';
+ 4ba:	a1 e0       	ldi	r26, 0x01	; 1
+ 4bc:	b0 e0       	ldi	r27, 0x00	; 0
+ 4be:	ac 0f       	add	r26, r28
+ 4c0:	bd 1f       	adc	r27, r29
+ 4c2:	ae 0f       	add	r26, r30
+ 4c4:	b1 1d       	adc	r27, r1
+ 4c6:	fd 01       	movw	r30, r26
+ 4c8:	81 e4       	ldi	r24, 0x41	; 65
+ 4ca:	80 83       	st	Z, r24
+ 4cc:	e2 e0       	ldi	r30, 0x02	; 2
+ 4ce:	e2 0f       	add	r30, r18
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:224
+  buf[idx] = '\0';
+ 4d0:	81 e0       	ldi	r24, 0x01	; 1
+ 4d2:	90 e0       	ldi	r25, 0x00	; 0
+ 4d4:	8c 0f       	add	r24, r28
+ 4d6:	9d 1f       	adc	r25, r29
+ 4d8:	8e 0f       	add	r24, r30
+ 4da:	91 1d       	adc	r25, r1
+ 4dc:	fc 01       	movw	r30, r24
+ 4de:	10 82       	st	Z, r1
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:225
+  lcd_setcursor(row, col);
+ 4e0:	63 2f       	mov	r22, r19
+ 4e2:	8f 2d       	mov	r24, r15
+ 4e4:	85 de       	rcall	.-758    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:226
+  lcd_print(buf);
+ 4e6:	ce 01       	movw	r24, r28
+ 4e8:	01 96       	adiw	r24, 0x01	; 1
+ 4ea:	97 de       	rcall	.-722    	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:227
+}
+ 4ec:	c7 5f       	subi	r28, 0xF7	; 247
+ 4ee:	cd bf       	out	0x3d, r28	; 61
+ 4f0:	df 91       	pop	r29
+ 4f2:	cf 91       	pop	r28
+ 4f4:	1f 91       	pop	r17
+ 4f6:	0f 91       	pop	r16
+ 4f8:	ff 90       	pop	r15
+ 4fa:	df 90       	pop	r13
+ 4fc:	cf 90       	pop	r12
+ 4fe:	bf 90       	pop	r11
+ 500:	af 90       	pop	r10
+ 502:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:205
+  lcd_print(buf);
+}
+
+void print_current(uint8_t row, uint8_t col, int16_t uA) {
+  char buf[9];
+  uint8_t idx = 0;
+ 504:	e0 e0       	ldi	r30, 0x00	; 0
+ 506:	55 cf       	rjmp	.-342    	; 0x3b2 <print_current(unsigned char, unsigned char, int)+0x42>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:214
+    if (col > 0){if ((uA <= -1000)&&(uA>-10000)) col--;}
+    uA = -uA;
+  } else if (uA < 100) buf[idx++] = ' ';
+  // Print Value
+  if (uA >= 10000) buf[idx++] = (uA / 10000) % 10 + '0';
+  if (uA >= 1000)  buf[idx++] = (uA / 1000) % 10 + '0';
+ 508:	08 3e       	cpi	r16, 0xE8	; 232
+ 50a:	b3 e0       	ldi	r27, 0x03	; 3
+ 50c:	1b 07       	cpc	r17, r27
+ 50e:	0c f0       	brlt	.+2      	; 0x512 <__LOCK_REGION_LENGTH__+0x112>
+ 510:	64 cf       	rjmp	.-312    	; 0x3da <print_current(unsigned char, unsigned char, int)+0x6a>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:215
+  if (uA >= 100)   buf[idx++] = (uA / 100) % 10 + '0';
+ 512:	04 36       	cpi	r16, 0x64	; 100
+ 514:	11 05       	cpc	r17, r1
+ 516:	0c f4       	brge	.+2      	; 0x51a <__LOCK_REGION_LENGTH__+0x11a>
+ 518:	8e cf       	rjmp	.-228    	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 51a:	72 cf       	rjmp	.-284    	; 0x400 <__LOCK_REGION_LENGTH__>
+
+0000051c <setup>:
+setup():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:232
+}
+
+//=========================== SETUP =============================//
+
+void setup() {
+  DDRB  |=  _BV(LED_PIN); // LED output
+ 51c:	bc 9a       	sbi	0x17, 4	; 23
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:233
+  PORTB &= ~_BV(LED_PIN); // LED off
+ 51e:	c4 98       	cbi	0x18, 4	; 24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:236
+
+  // PB0 sebagai output LOW, PB1 sebagai input dengan pull-up
+  DDRB  |=  _BV(PB0);  // PB0 sebagai OUTPUT
+ 520:	b8 9a       	sbi	0x17, 0	; 23
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:237
+  PORTB &= ~_BV(PB0);  // PB0 output LOW (0V, acting as GND)
+ 522:	c0 98       	cbi	0x18, 0	; 24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:238
+  DDRB  &= ~_BV(PB1);  // PB1 sebagai INPUT
+ 524:	b9 98       	cbi	0x17, 1	; 23
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:239
+  PORTB |=  _BV(PB1);  // Aktifkan pull-up (PB1 default HIGH jika floating)
+ 526:	c1 9a       	sbi	0x18, 1	; 24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:241
+
+  sda_hi(); scl_hi(); // I2C idle high
+ 528:	a3 dd       	rcall	.-1210   	; 0x70 <sda_hi()>
+ 52a:	a8 dd       	rcall	.-1200   	; 0x7c <scl_hi()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:243
+
+  lcd_setcursor(0, 0); lcd_print("  Dual Channel  ");
+ 52c:	60 e0       	ldi	r22, 0x00	; 0
+ 52e:	80 e0       	ldi	r24, 0x00	; 0
+ 530:	5f de       	rcall	.-834    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 532:	80 e6       	ldi	r24, 0x60	; 96
+ 534:	90 e0       	ldi	r25, 0x00	; 0
+ 536:	71 de       	rcall	.-798    	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:244
+  lcd_setcursor(1, 0); lcd_print("Volt.Curr Sensor");
+ 538:	60 e0       	ldi	r22, 0x00	; 0
+ 53a:	81 e0       	ldi	r24, 0x01	; 1
+ 53c:	59 de       	rcall	.-846    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 53e:	81 e7       	ldi	r24, 0x71	; 113
+ 540:	90 e0       	ldi	r25, 0x00	; 0
+ 542:	6b de       	rcall	.-810    	; 0x21a <lcd_print(char const*)>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 544:	2f ef       	ldi	r18, 0xFF	; 255
+ 546:	8d e3       	ldi	r24, 0x3D	; 61
+ 548:	99 e4       	ldi	r25, 0x49	; 73
+ 54a:	21 50       	subi	r18, 0x01	; 1
+ 54c:	80 40       	sbci	r24, 0x00	; 0
+ 54e:	90 40       	sbci	r25, 0x00	; 0
+ 550:	e1 f7       	brne	.-8      	; 0x54a <setup+0x2e>
+ 552:	00 c0       	rjmp	.+0      	; 0x554 <setup+0x38>
+ 554:	00 00       	nop
+setup():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:246
+  _delay_ms(2000);
+}
+ 556:	08 95       	ret
+
+00000558 <loop>:
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:250
+
+//============================ LOOP =============================//
+
+void loop() {
+ 558:	1f 93       	push	r17
+ 55a:	cf 93       	push	r28
+ 55c:	df 93       	push	r29
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:251
+  bool LCDok  = scan_address(LCD_ADDR);
+ 55e:	87 e2       	ldi	r24, 0x27	; 39
+ 560:	b6 de       	rcall	.-660    	; 0x2ce <scan_address(unsigned char)>
+ 562:	18 2f       	mov	r17, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:252
+  bool INA1ok = scan_address(INA219_ADD1);
+ 564:	80 e4       	ldi	r24, 0x40	; 64
+ 566:	b3 de       	rcall	.-666    	; 0x2ce <scan_address(unsigned char)>
+ 568:	d8 2f       	mov	r29, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:253
+  bool INA2ok = scan_address(INA219_ADD2);
+ 56a:	81 e4       	ldi	r24, 0x41	; 65
+ 56c:	b0 de       	rcall	.-672    	; 0x2ce <scan_address(unsigned char)>
+ 56e:	c8 2f       	mov	r28, r24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:255
+
+  if(LCDok){
+ 570:	11 23       	and	r17, r17
+ 572:	09 f4       	brne	.+2      	; 0x576 <loop+0x1e>
+ 574:	56 c0       	rjmp	.+172    	; 0x622 <loop+0xca>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:256
+    if(!LCDinit){
+ 576:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <LCDinit>
+ 57a:	81 11       	cpse	r24, r1
+ 57c:	04 c0       	rjmp	.+8      	; 0x586 <loop+0x2e>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:257
+      lcd_init();
+ 57e:	ff dd       	rcall	.-1026   	; 0x17e <lcd_init()>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:258
+      LCDinit = 1;
+ 580:	81 e0       	ldi	r24, 0x01	; 1
+ 582:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <LCDinit>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:260
+    }
+    lcd_setcursor(0, 7); lcd_print("  ");
+ 586:	67 e0       	ldi	r22, 0x07	; 7
+ 588:	80 e0       	ldi	r24, 0x00	; 0
+ 58a:	32 de       	rcall	.-924    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 58c:	8e e6       	ldi	r24, 0x6E	; 110
+ 58e:	90 e0       	ldi	r25, 0x00	; 0
+ 590:	44 de       	rcall	.-888    	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:261
+    lcd_setcursor(1, 7); lcd_print("  ");
+ 592:	67 e0       	ldi	r22, 0x07	; 7
+ 594:	81 e0       	ldi	r24, 0x01	; 1
+ 596:	2c de       	rcall	.-936    	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 598:	8e e6       	ldi	r24, 0x6E	; 110
+ 59a:	90 e0       	ldi	r25, 0x00	; 0
+ 59c:	3e de       	rcall	.-900    	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:266
+  }else{
+    LCDinit = 0;
+  }
+
+  if (INA1ok) {
+ 59e:	dd 23       	and	r29, r29
+ 5a0:	09 f4       	brne	.+2      	; 0x5a4 <loop+0x4c>
+ 5a2:	42 c0       	rjmp	.+132    	; 0x628 <loop+0xd0>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:267
+    if(!INA1init){ ina219_init(INA219_ADD1); INA1init = INA1ok;}
+ 5a4:	80 91 9b 00 	lds	r24, 0x009B	; 0x80009b <INA1init>
+ 5a8:	81 11       	cpse	r24, r1
+ 5aa:	05 c0       	rjmp	.+10     	; 0x5b6 <loop+0x5e>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:267 (discriminator 1)
+ 5ac:	80 e4       	ldi	r24, 0x40	; 64
+ 5ae:	82 de       	rcall	.-764    	; 0x2b4 <ina219_init(unsigned char)>
+ 5b0:	81 e0       	ldi	r24, 0x01	; 1
+ 5b2:	80 93 9b 00 	sts	0x009B, r24	; 0x80009b <INA1init>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:268
+    print_voltage(0, 0, ina219_get_mV(INA219_ADD1));
+ 5b6:	80 e4       	ldi	r24, 0x40	; 64
+ 5b8:	70 de       	rcall	.-800    	; 0x29a <ina219_get_mV(unsigned char)>
+ 5ba:	ac 01       	movw	r20, r24
+ 5bc:	60 e0       	ldi	r22, 0x00	; 0
+ 5be:	80 e0       	ldi	r24, 0x00	; 0
+ 5c0:	91 de       	rcall	.-734    	; 0x2e4 <print_voltage(unsigned char, unsigned char, unsigned int)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:269
+    print_current(1, 0, ina219_get_uA(INA219_ADD1));
+ 5c2:	80 e4       	ldi	r24, 0x40	; 64
+ 5c4:	67 de       	rcall	.-818    	; 0x294 <ina219_get_uA(unsigned char)>
+ 5c6:	ac 01       	movw	r20, r24
+ 5c8:	60 e0       	ldi	r22, 0x00	; 0
+ 5ca:	81 e0       	ldi	r24, 0x01	; 1
+ 5cc:	d1 de       	rcall	.-606    	; 0x370 <print_current(unsigned char, unsigned char, int)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:276
+    INA1init = 0;
+    lcd_setcursor(0, 0); lcd_print("Sensor1");
+    lcd_setcursor(1, 0); lcd_print("unplug ");
+  }
+
+  if (INA2ok) {
+ 5ce:	cc 23       	and	r28, r28
+ 5d0:	d1 f1       	breq	.+116    	; 0x646 <loop+0xee>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:277
+    if(!INA2init){ ina219_init(INA219_ADD2); INA2init = INA2ok;}
+ 5d2:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <__data_end>
+ 5d6:	81 11       	cpse	r24, r1
+ 5d8:	05 c0       	rjmp	.+10     	; 0x5e4 <loop+0x8c>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:277 (discriminator 1)
+ 5da:	81 e4       	ldi	r24, 0x41	; 65
+ 5dc:	6b de       	rcall	.-810    	; 0x2b4 <ina219_init(unsigned char)>
+ 5de:	81 e0       	ldi	r24, 0x01	; 1
+ 5e0:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__data_end>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:278
+    print_voltage(0, 9, ina219_get_mV(INA219_ADD2));
+ 5e4:	81 e4       	ldi	r24, 0x41	; 65
+ 5e6:	59 de       	rcall	.-846    	; 0x29a <ina219_get_mV(unsigned char)>
+ 5e8:	ac 01       	movw	r20, r24
+ 5ea:	69 e0       	ldi	r22, 0x09	; 9
+ 5ec:	80 e0       	ldi	r24, 0x00	; 0
+ 5ee:	7a de       	rcall	.-780    	; 0x2e4 <print_voltage(unsigned char, unsigned char, unsigned int)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:279
+    print_current(1, 9, ina219_get_uA(INA219_ADD2));
+ 5f0:	81 e4       	ldi	r24, 0x41	; 65
+ 5f2:	50 de       	rcall	.-864    	; 0x294 <ina219_get_uA(unsigned char)>
+ 5f4:	ac 01       	movw	r20, r24
+ 5f6:	69 e0       	ldi	r22, 0x09	; 9
+ 5f8:	81 e0       	ldi	r24, 0x01	; 1
+ 5fa:	ba de       	rcall	.-652    	; 0x370 <print_current(unsigned char, unsigned char, int)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:287
+    lcd_setcursor(0, 9); lcd_print("Sensor2");
+    lcd_setcursor(1, 9); lcd_print("unplug ");
+  }
+
+  // Deteksi koneksi PB0 dan PB1
+  PORTB ^= _BV(LED_PIN);                      // Toggle LED
+ 5fc:	88 b3       	in	r24, 0x18	; 24
+ 5fe:	90 e1       	ldi	r25, 0x10	; 16
+ 600:	89 27       	eor	r24, r25
+ 602:	88 bb       	out	0x18, r24	; 24
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:288
+  if((PINB & _BV(PB1)) == 0) _delay_ms(294);  // PB1 open
+ 604:	b1 99       	sbic	0x16, 1	; 22
+ 606:	2e c0       	rjmp	.+92     	; 0x664 <loop+0x10c>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 608:	2f e3       	ldi	r18, 0x3F	; 63
+ 60a:	84 ec       	ldi	r24, 0xC4	; 196
+ 60c:	9a e0       	ldi	r25, 0x0A	; 10
+ 60e:	21 50       	subi	r18, 0x01	; 1
+ 610:	80 40       	sbci	r24, 0x00	; 0
+ 612:	90 40       	sbci	r25, 0x00	; 0
+ 614:	e1 f7       	brne	.-8      	; 0x60e <loop+0xb6>
+ 616:	00 c0       	rjmp	.+0      	; 0x618 <loop+0xc0>
+ 618:	00 00       	nop
+loop():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:293
+  //{ _delay_ms(294); _delay_us(536);}        // jeda  333.ms
+  else                       _delay_ms(961);  // PB1 grounded
+  //{ _delay_ms(961); _delay_us(880);}        // jeda 1000.ms
+
+}
+ 61a:	df 91       	pop	r29
+ 61c:	cf 91       	pop	r28
+ 61e:	1f 91       	pop	r17
+ 620:	08 95       	ret
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:263
+      LCDinit = 1;
+    }
+    lcd_setcursor(0, 7); lcd_print("  ");
+    lcd_setcursor(1, 7); lcd_print("  ");
+  }else{
+    LCDinit = 0;
+ 622:	10 92 9c 00 	sts	0x009C, r1	; 0x80009c <LCDinit>
+ 626:	bb cf       	rjmp	.-138    	; 0x59e <loop+0x46>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:271
+  if (INA1ok) {
+    if(!INA1init){ ina219_init(INA219_ADD1); INA1init = INA1ok;}
+    print_voltage(0, 0, ina219_get_mV(INA219_ADD1));
+    print_current(1, 0, ina219_get_uA(INA219_ADD1));
+  } else {
+    INA1init = 0;
+ 628:	10 92 9b 00 	sts	0x009B, r1	; 0x80009b <INA1init>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:272
+    lcd_setcursor(0, 0); lcd_print("Sensor1");
+ 62c:	60 e0       	ldi	r22, 0x00	; 0
+ 62e:	80 e0       	ldi	r24, 0x00	; 0
+ 630:	df dd       	rcall	.-1090   	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 632:	82 e8       	ldi	r24, 0x82	; 130
+ 634:	90 e0       	ldi	r25, 0x00	; 0
+ 636:	f1 dd       	rcall	.-1054   	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:273
+    lcd_setcursor(1, 0); lcd_print("unplug ");
+ 638:	60 e0       	ldi	r22, 0x00	; 0
+ 63a:	81 e0       	ldi	r24, 0x01	; 1
+ 63c:	d9 dd       	rcall	.-1102   	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 63e:	8a e8       	ldi	r24, 0x8A	; 138
+ 640:	90 e0       	ldi	r25, 0x00	; 0
+ 642:	eb dd       	rcall	.-1066   	; 0x21a <lcd_print(char const*)>
+ 644:	c4 cf       	rjmp	.-120    	; 0x5ce <loop+0x76>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:281
+  if (INA2ok) {
+    if(!INA2init){ ina219_init(INA219_ADD2); INA2init = INA2ok;}
+    print_voltage(0, 9, ina219_get_mV(INA219_ADD2));
+    print_current(1, 9, ina219_get_uA(INA219_ADD2));
+  } else {
+    INA2init = 0;
+ 646:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <__data_end>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:282
+    lcd_setcursor(0, 9); lcd_print("Sensor2");
+ 64a:	69 e0       	ldi	r22, 0x09	; 9
+ 64c:	80 e0       	ldi	r24, 0x00	; 0
+ 64e:	d0 dd       	rcall	.-1120   	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 650:	82 e9       	ldi	r24, 0x92	; 146
+ 652:	90 e0       	ldi	r25, 0x00	; 0
+ 654:	e2 dd       	rcall	.-1084   	; 0x21a <lcd_print(char const*)>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:283
+    lcd_setcursor(1, 9); lcd_print("unplug ");
+ 656:	69 e0       	ldi	r22, 0x09	; 9
+ 658:	81 e0       	ldi	r24, 0x01	; 1
+ 65a:	ca dd       	rcall	.-1132   	; 0x1f0 <lcd_setcursor(unsigned char, unsigned char)>
+ 65c:	8a e8       	ldi	r24, 0x8A	; 138
+ 65e:	90 e0       	ldi	r25, 0x00	; 0
+ 660:	dc dd       	rcall	.-1096   	; 0x21a <lcd_print(char const*)>
+ 662:	cc cf       	rjmp	.-104    	; 0x5fc <loop+0xa4>
+_delay_ms():
+c:\users\tuxz\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\util/delay.h:187
+ 664:	2f e5       	ldi	r18, 0x5F	; 95
+ 666:	81 e3       	ldi	r24, 0x31	; 49
+ 668:	93 e2       	ldi	r25, 0x23	; 35
+ 66a:	21 50       	subi	r18, 0x01	; 1
+ 66c:	80 40       	sbci	r24, 0x00	; 0
+ 66e:	90 40       	sbci	r25, 0x00	; 0
+ 670:	e1 f7       	brne	.-8      	; 0x66a <loop+0x112>
+ 672:	d1 cf       	rjmp	.-94     	; 0x616 <loop+0xbe>
+
+00000674 <main>:
+main():
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:298
+}
+
+//=========================== MAIN =============================//
+
+int main(void) {
+  setup();
+ 674:	53 df       	rcall	.-346    	; 0x51c <setup>
+D:\- Libraries -\Documents\Arduino\ATtiny2313_Dual_Sensor_ina219/ATtiny2313_Dual_Sensor_ina219.ino:299 (discriminator 1)
+  while (1) loop();
+ 676:	70 df       	rcall	.-288    	; 0x558 <loop>
+ 678:	fe cf       	rjmp	.-4      	; 0x676 <main+0x2>
+
+0000067a <__udivmodhi4>:
+__udivmodhi4():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1408
+ 67a:	aa 1b       	sub	r26, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1409
+ 67c:	bb 1b       	sub	r27, r27
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1410
+ 67e:	51 e1       	ldi	r21, 0x11	; 17
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1411
+ 680:	07 c0       	rjmp	.+14     	; 0x690 <__udivmodhi4_ep>
+
+00000682 <__udivmodhi4_loop>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1413
+ 682:	aa 1f       	adc	r26, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1414
+ 684:	bb 1f       	adc	r27, r27
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1415
+ 686:	a6 17       	cp	r26, r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1416
+ 688:	b7 07       	cpc	r27, r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1417
+ 68a:	10 f0       	brcs	.+4      	; 0x690 <__udivmodhi4_ep>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1418
+ 68c:	a6 1b       	sub	r26, r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1419
+ 68e:	b7 0b       	sbc	r27, r23
+
+00000690 <__udivmodhi4_ep>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1421
+ 690:	88 1f       	adc	r24, r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1422
+ 692:	99 1f       	adc	r25, r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1423
+ 694:	5a 95       	dec	r21
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1424
+ 696:	a9 f7       	brne	.-22     	; 0x682 <__udivmodhi4_loop>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1425
+ 698:	80 95       	com	r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1426
+ 69a:	90 95       	com	r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1428
+ 69c:	bc 01       	movw	r22, r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1430
+ 69e:	cd 01       	movw	r24, r26
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1432
+ 6a0:	08 95       	ret
+
+000006a2 <__divmodhi4>:
+__divmodhi4():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1440
+ 6a2:	97 fb       	bst	r25, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1441
+ 6a4:	07 2e       	mov	r0, r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1442
+ 6a6:	16 f4       	brtc	.+4      	; 0x6ac <__divmodhi4+0xa>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1443
+ 6a8:	00 94       	com	r0
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1444
+ 6aa:	06 d0       	rcall	.+12     	; 0x6b8 <__divmodhi4_neg1>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1446
+ 6ac:	77 fd       	sbrc	r23, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1447
+ 6ae:	08 d0       	rcall	.+16     	; 0x6c0 <__divmodhi4_neg2>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1448
+ 6b0:	e4 df       	rcall	.-56     	; 0x67a <__udivmodhi4>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1449
+ 6b2:	07 fc       	sbrc	r0, 7
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1450
+ 6b4:	05 d0       	rcall	.+10     	; 0x6c0 <__divmodhi4_neg2>
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1451
+ 6b6:	3e f4       	brtc	.+14     	; 0x6c6 <__divmodhi4_exit>
+
+000006b8 <__divmodhi4_neg1>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1454
+ 6b8:	90 95       	com	r25
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1455
+ 6ba:	81 95       	neg	r24
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1456
+ 6bc:	9f 4f       	sbci	r25, 0xFF	; 255
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1457
+ 6be:	08 95       	ret
+
+000006c0 <__divmodhi4_neg2>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1460
+ 6c0:	70 95       	com	r23
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1461
+ 6c2:	61 95       	neg	r22
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1462
+ 6c4:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000006c6 <__divmodhi4_exit>:
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:1464
+ 6c6:	08 95       	ret
+
+000006c8 <_exit>:
+exit():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+ 6c8:	f8 94       	cli
+
+000006ca <__stop_program>:
+__stop_program():
+/home/jenkins-mingw32/workspace/avr-gcc-staging/label/Ubuntu14.04x64-mingw32/gcc-build/avr/avr25/tiny-stack/libgcc/../../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+ 6ca:	ff cf       	rjmp	.-2      	; 0x6ca <__stop_program>
